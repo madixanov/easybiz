@@ -4,7 +4,7 @@
       <span class="nav-burger" @click="showAside()" v-html="burger"></span>
       <div
         class="profile-nav-section-title"
-        :class="route.path.includes('/edit#main') ? 'active' : ''"
+        :class="route.path.includes('profile') ? 'active' : ''"
       >
         <img src="/assets/icons/navigation/user.svg" alt="" />
         <h3>Профиль</h3>

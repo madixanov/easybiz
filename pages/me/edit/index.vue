@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <div class="profile-wrapper screen80">
-      <div class="profile-section" id="main">
+      <div class="profile-section" id="profilemain">
         <h3 class="profile-title">Основные</h3>
         <MeUploader :user="user" @update-image="updateImage" />
         <UiLoader
@@ -12,7 +12,7 @@
         />
         <MeForm v-if="loaded && user" v-model:username="user.username" />
       </div>
-      <div class="profile-section" id="security">
+      <div class="profile-section" id="profilesecurity">
         <h3 class="profile-title">Безопасность</h3>
         <UiLoader
           :height="'100%'"
@@ -49,7 +49,7 @@
           v-model:facebook="user.facebook"
         />
       </div>
-      <div class="profile-section" id="analytics">
+      <div class="profile-section" id="integrationsanalytics">
         <h3 class="profile-title">Аналитика</h3>
         <UiLoader
           :height="'100%'"
