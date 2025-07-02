@@ -1,9 +1,6 @@
 <template>
     <div class="login">
         <div class="login-box">
-            <div class="login-logo">
-                <img src="../src/assets/images/logo.svg" class="login-logo-item" alt="" />
-            </div>
             <div class="login-modal">
                 <label for="login">
                     <p class="login-modal-title">Логин</p>

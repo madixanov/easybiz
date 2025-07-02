@@ -3,7 +3,6 @@
 dist/
 .nuxt/
 node_modules/
-build/
 .cache/
 
 # Local environments
