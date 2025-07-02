@@ -50,8 +50,8 @@ export async function init() {
     await getLabels(component.value);
 
     // Инициализация редактора через GrapesJS
-    // const editor = grapesjs.init(component.value);
-    const editor = new EditorApp(component.value);
+    const editor = grapesjs.init(component.value);
+    // const editor = new EditorApp(component.value);
 
     return editor; // Возвращаем объект редактора
 }
