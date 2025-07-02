@@ -1,1 +1,2 @@
-/api/projects   http://3.67.84.116/api/projects   200
+/api/*   http://3.67.84.116/api/*   200
+/users/*   http://http://3.125.46.191/users/*   200
