@@ -1,0 +1,29 @@
+.chat{
+    &-nav{
+        position: sticky;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding: 1rem .5rem;
+        border-right: .1rem solid #E5E5E5;
+
+        &-list{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &-link{
+            padding: 1.35rem;
+            border-radius: .4rem;
+
+            &:hover{
+                background: #229c380e;
+            }
+
+            &.active{
+                background: #229C391A;
+            }
+        }
+    }
+}
