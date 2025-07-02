@@ -5,7 +5,7 @@ export const CONSTRUCTOR_URL = 'http://3.67.84.116'
 export const uri = `${USER_FETCH_HOST}`
 
 export function apiDataFetch(url: string, options: RequestInit) {
-    const path = USER_FETCH_HOST + url;
+    const path =  url;
     return fetch(path, options);
     // return true;
 }
