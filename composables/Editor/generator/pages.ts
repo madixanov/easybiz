@@ -46,8 +46,10 @@ class Pages {
         try {
             // const response = await apiDataFetch(`${USER_FETCH_HOST}/constructor/projects/${this.p_id}/create/page`, options);
             const response = await apiConstructorFetch(`/api/pages`, options);
-            const data = await response.json();
-            if (data.error) return FailedAlert(data.error);
+            const data = await response.text();
+            console.log(data);
+            
+            // if (data.error) return FailedAlert(data.error);
             PushNotification("Страница успешно создана");
             // PushNotification(data.message);
         } catch (error: any) {
