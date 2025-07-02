@@ -33,7 +33,7 @@
           @alert="showAlert"
         />
       </div>
-      <div class="profile-section" id="socials">
+      <div class="profile-section" id="integrationssocials">
         <h3 class="profile-title">Интеграции</h3>
         <UiLoader
           :height="'100%'"
