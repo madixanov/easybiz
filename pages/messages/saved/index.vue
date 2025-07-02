@@ -43,26 +43,9 @@ const fetchSavedChats = async () => {
     console.error('Ошибка:', error);
   }
 };
-
-const selectChat = (id: string) => {
-  activeChatId.value = id;
-};
-
 const activeChat = computed(() =>
   savedChats.value.find(chat => chat.id === activeChatId.value) || null
 );
-
-const chatMessages = computed(() => {
-  if (!activeChat.value) return [];
-  return activeChat.value.messages.map(msg => ({
-    id: msg.id,
-    sender: activeChat.value?.client.username || 'Гость',
-    email: 'client@example.com',
-    number: '+998901234567',
-    text: msg.content,
-    createdAt: msg.createdAt,
-  }));
-});
 
 onMounted(() => {
   fetchSavedChats();

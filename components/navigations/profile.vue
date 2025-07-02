@@ -12,14 +12,14 @@
       <ul class="profile-nav-list">
         <a
           class="profile-nav-link"
-          href="#main"
-          :class="{ active: activeId === 'main' }"
+          href="#profilemain"
+          :class="{ active: activeId === 'profilemain' }"
           >Основные</a
         >
         <a
           class="profile-nav-link"
-          href="#security"
-          :class="{ active: activeId === 'security' }"
+          href="#profilesecurity"
+          :class="{ active: activeId === 'profilesecurity' }"
           >Безопасность</a
         >
       </ul>
@@ -27,7 +27,7 @@
     <div class="profile-nav-section">
       <div
         class="profile-nav-section-title"
-        :class="route.fullPath.includes('/edit#socials') ? 'active' : ''"
+        :class="route.fullPath.includes('integrations') ? 'active' : ''"
       >
         <img src="/assets/icons/navigation/integration.svg" alt="" />
         <h3>Интеграции</h3>
@@ -35,20 +35,20 @@
       <ul class="profile-nav-list">
         <a
           class="profile-nav-link"
-          href="#socials"
-          :class="{ active: activeId === 'socials' }"
+          href="#integrationssocials"
+          :class="{ active: activeId === 'integrationssocials' }"
           >Социальные сети</a
         >
         <a
           class="profile-nav-link"
-          href="#analytics"
-          :class="{ active: activeId === 'analytics' }"
+          href="#integrationsanalytics"
+          :class="{ active: activeId === 'integrationsanalytics' }"
           >Аналитика</a
         >
         <a
           class="profile-nav-link"
-          href="#payments"
-          :class="{ active: activeId === 'payments' }"
+          href="#integrationspayments"
+          :class="{ active: activeId === 'integrationspayments' }"
           >Платежи</a
         >
       </ul>
@@ -66,7 +66,7 @@ const showAside = ()=>{
 const route = useRoute()
 const activeId = ref('')
 
-// ScrollSections(activeId)
+ScrollSections(activeId)
 </script>
 
 <style lang="scss" scoped></style>
