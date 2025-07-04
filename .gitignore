@@ -1,0 +1,11 @@
+# Build output
+.output/
+dist/
+.nuxt/
+node_modules/
+.cache/
+
+# Local environments
+.env
+.env.*
+*.local

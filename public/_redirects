@@ -1,0 +1,2 @@
+/api/*     http://3.67.84.116/api/:splat     200
+/users/*   http://3.125.46.191/users/:splat   200
