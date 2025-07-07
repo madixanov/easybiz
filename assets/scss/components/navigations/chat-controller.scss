@@ -1,20 +1,20 @@
 
 .chat {
-    &-wrapper {
+    &-nav {
         max-width: max-content;
         min-width: max-content;
         width: 100%;
-        height: auto
-    }
+        height: auto;
 
-    &-nav {
-        width: 100%;
-        position: sticky;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        padding: 1rem .5rem;
-        border-right: .1rem solid #E5E5E5;
+        &-box{
+            width: 100%;
+            position: sticky;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            padding: 1rem .5rem;
+            border-right: .1rem solid #E5E5E5;
+        }
 
         &-list {
             display: flex;

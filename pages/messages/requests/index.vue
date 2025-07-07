@@ -91,7 +91,7 @@ const getRequests = async () => {
     }
 
     const req = await res.json();
-    const sortedReq = req.sort((a, b) => {
+    const sortedReq = req.sort((a: any, b) => {
       if (a.status === 'ARCHIVED' && b.status !== 'ARCHIVED') {
         return 1;
       }
@@ -169,6 +169,7 @@ onMounted(() => {
     border-radius: 1.2rem;
     overflow: hidden;
     position: relative;
+
     @media (max-width: 650px) {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -176,14 +177,10 @@ onMounted(() => {
   }
 
   &-table {
-    width: 100%;
-    border-collapse: collapse;
+    min-width: 100%; 
+    width: max-content;
     font-family: Arial, sans-serif;
     background-color: #fff;
-
-    @media (max-width: 650px) {
-      min-width: 65rem;
-    }
 
     &-col {
       border-bottom: 0.1rem solid #e0e2e7;

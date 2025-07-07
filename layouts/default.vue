@@ -105,9 +105,9 @@
     <ProfileNav />
 
     <div class="wrapper-box">
-      <div class="chat-wrapper">
+      <div class="chat-nav">
         <div
-          class="chat-nav"
+          class="chat-nav-box"
           :style="{
             display: $router.currentRoute.value.path.includes('messages')
               ? 'block'
@@ -308,6 +308,7 @@ onMounted(async () => {
   max-width: 100%;
   width: 100%;
   padding: 2rem;
+  box-sizing: border-box;
 
   @media (max-width: 1024px) {
     padding: 1.5rem;

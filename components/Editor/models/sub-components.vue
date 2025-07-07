@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { apiConstructorFetch } from "~/composables/Exports";
-const components = ref([] as any);
+import {apiConstructorFetch} from '~/composables/Exports';
 
+const components = ref([] as any);
 const getComponents = async () => {
     const options = {
         method: "GET",
@@ -25,46 +25,6 @@ const toggle = () => {
     components?.classList.toggle("active");
 }
 
-const categoryFilter = (e: Event) => {
-    const target = e.target as HTMLElement;
-    const category = target?.dataset.category;
-
-    const buttons = document.querySelectorAll(".components-linker");
-    buttons.forEach((button: any) => {
-        button.classList.remove("active");
-    })
-
-    target.classList.add("active");
-
-    if (!category) {
-        console.warn("Category data attribute is missing.");
-        return;
-    }
-
-    const item = document.querySelector(`#${category}`);
-    if (!item) {
-        console.warn(`Element with id "${category}" not found.`);
-        return;
-    }
-
-    const rect = item.getBoundingClientRect();
-    const components = document.querySelector(".components-content");
-
-    if (!components) {
-        console.warn('Element with class ".components-content" not found.');
-        return;
-    }
-
-    const currentScroll = components.scrollTop;
-    const componentsRect = components.getBoundingClientRect();
-    const offsetTop = currentScroll + rect.top - componentsRect.top;
-
-    components.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-    });
-};
-
 onMounted(async () => {
     await getComponents();
 })
@@ -87,34 +47,33 @@ onMounted(async () => {
             </ul>
         </div>
         <div class="components-main">
-            <aside class="components-aside">
+            <!-- <aside class="components-aside">
                 <ul class="components-list">
                     <li class="components-item" v-for="item in components"
-                        :style="{ display: item.id === 'defaults' || item.length == 0 ? 'none' : 'block', color: 'black' }"
-                        :hidden="!item">
-                        <button @click="categoryFilter($event)" :data-category="`id${item.id}`"
+                        :style="{ display: item.id === 'defaults' || item.components.length == 0 ? 'none' : 'block', color: 'black' }"
+                        :hidden="!item.components">
+                        <button @click="categoryFilter($event)" :data-category="item.id"
                             class="components-linker bg-transparent text-stone-950 opacity-50 w-full text-xl text-start pt-4 pb-4 pl-6 pr-6">
                             {{ item.name }}
                         </button>
                     </li>
                 </ul>
-            </aside>
+            </aside> -->
             <div class="components-content">
-                <div class="components-cards" :id="`id${item.id}`" v-for="item in components" :style="{
-                    display: !item.length ? 'flex' : 'none'
+                <div class="components-cards" :id="item.id" v-for="item in components" :style="{
+                    display: item.components.length && item.id === 'defaults' ? 'flex' : 'none'
                 }">
                     <div class="components-card-main">
-                        <div class="components-card" :data-html="item.content" :area-id="`/default/${item.id}`"
-                            v-for="(cmp, cmpIndex) in item"
-                            :style="{ display: 'block' }">
+                        <div class="components-card" :data-html="cmp.content" :area-id="`/default/${cmp.id}`"
+                            v-for="(cmp, cmpIndex) in item.components"
+                            :style="{ display: cmpIndex !== 3 ? 'block' : 'none' }">
                             <div class="components-card-preview">
                                 <div class="components-card-icons">
                                     <i></i><i></i><i></i>
                                 </div>
                                 <!-- <span class="components-card-title text-sm">header:{{ cmpIndex + 1 }}</span> -->
                             </div>
-                            <!-- <img :src="cmp.label.replace('https://api-neotech-landing.neotech.uz', 'http://localhost:5003')" alt=""> -->
-                            <img :src="item.previewImageUrl" alt="">
+                            <img :src="cmp.label.replace('https://api-neotech-landing.neotech.uz', 'http://localhost:5003')" alt="">
                         </div>
                     </div>
                 </div>

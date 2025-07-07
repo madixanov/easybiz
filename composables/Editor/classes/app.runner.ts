@@ -15,7 +15,8 @@ class Runner {
         await new PlusAddon(this.editor).activate();
         await new ButtonMods(this.editor);
         await setTimeout(async () => {
-            await new PanelsMods(this.editor);
+            // await new PanelsMods(this.editor);
+            await new PanelsMods(this.editor).components();
             await new ComponentsAddons(this.editor);
         }, 300);
     }

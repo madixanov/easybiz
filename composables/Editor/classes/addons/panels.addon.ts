@@ -61,6 +61,8 @@ class PanelsMods {
                 }
             }
         })
+        console.log("PanelsMods: components()", this._editor.Panels);
+        console.log(exportButton, 'exported buttons')
     }
 }
 
