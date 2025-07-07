@@ -91,7 +91,7 @@ const getRequests = async () => {
     }
 
     const req = await res.json();
-    const sortedReq = req.sort((a: any, b) => {
+    const sortedReq = req.sort((a, b) => {
       if (a.status === 'ARCHIVED' && b.status !== 'ARCHIVED') {
         return 1;
       }
