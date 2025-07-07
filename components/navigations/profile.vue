@@ -4,7 +4,11 @@
       <span class="nav-burger" @click="showAside()" v-html="burger"></span>
       <div
         class="profile-nav-section-title"
+<<<<<<< HEAD
         :class="route.fullPath.includes('profile') ? 'active' : ''"
+=======
+        :class="{ active: activeGroup === 'profile' }"
+>>>>>>> master
       >
         <img src="/assets/icons/navigation/user.svg" alt="" />
         <h3>Профиль</h3>
@@ -13,13 +17,21 @@
         <a
           class="profile-nav-link"
           href="#profilemain"
+<<<<<<< HEAD
           :class="{ active: activeId === 'profilemain' }"
+=======
+          :class="{ active: activeId === 'profilemain'}"
+>>>>>>> master
           >Основные</a
         >
         <a
           class="profile-nav-link"
           href="#profilesecurity"
+<<<<<<< HEAD
           :class="{ active: activeId === 'profilesecurity' }"
+=======
+          :class="{ active: activeId === 'profilesecurity'}"
+>>>>>>> master
           >Безопасность</a
         >
       </ul>
@@ -27,7 +39,11 @@
     <div class="profile-nav-section">
       <div
         class="profile-nav-section-title"
+<<<<<<< HEAD
         :class="route.fullPath.includes('integrations') ? 'active' : ''"
+=======
+        :class="{ active: activeGroup === 'integrations' }"
+>>>>>>> master
       >
         <img src="/assets/icons/navigation/integration.svg" alt="" />
         <h3>Интеграции</h3>
@@ -65,8 +81,14 @@ const showAside = ()=>{
 }
 const route = useRoute()
 const activeId = ref('')
+<<<<<<< HEAD
 
 ScrollSections(activeId)
+=======
+const activeGroup = ref('')
+
+ScrollSections(activeId, activeGroup)
+>>>>>>> master
 </script>
 
 <style lang="scss" scoped></style>

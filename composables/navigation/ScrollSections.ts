@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const ScrollSections = (activeId: Ref<string>) => {
+=======
+const ScrollSections = (activeId: Ref<string>, activeGroup: Ref<string>) => {
+>>>>>>> master
   class AnchorObserver {
     private observer: IntersectionObserver
     private callback: (id: string) => void
@@ -14,7 +18,11 @@ const ScrollSections = (activeId: Ref<string>) => {
     }
 
     observe() {
+<<<<<<< HEAD
       const sections = document.querySelectorAll<HTMLElement>('div[id^="sec"]')
+=======
+      const sections = document.querySelectorAll<HTMLElement>('.profile-section')
+>>>>>>> master
       sections.forEach(section => this.observer.observe(section))
     }
 
@@ -33,6 +41,15 @@ const ScrollSections = (activeId: Ref<string>) => {
       if (this.visibleSections.size > 0) {
         const mostVisible = [...this.visibleSections.entries()].sort((a, b) => b[1] - a[1])[0]
         this.callback(mostVisible[0])
+<<<<<<< HEAD
+=======
+
+        if (id.startsWith('profile')) {
+          activeGroup.value = 'profile'
+        } else if (id.startsWith('integrations')) {
+          activeGroup.value = 'integrations'
+        }      
+>>>>>>> master
       }
     }
 
@@ -46,9 +63,21 @@ const ScrollSections = (activeId: Ref<string>) => {
   onMounted(() => {
     anchorObserver = new AnchorObserver((id) => {
       activeId.value = id
+<<<<<<< HEAD
     })
     anchorObserver.observe()
   })
+=======
+      if (id.startsWith('profile')) {
+        activeGroup.value = 'profile'
+      } else if (id.startsWith('integrations')) {
+        activeGroup.value = 'integrations'
+      }
+    })
+    anchorObserver.observe()
+  })
+  
+>>>>>>> master
 
   onBeforeUnmount(() => {
     anchorObserver.disconnect()
