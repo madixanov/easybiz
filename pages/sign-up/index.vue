@@ -132,6 +132,7 @@ const sign_up = async () => {
   justify-content: center;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
+  overflow-y: auto;
 
   &-logo {
     margin-bottom: 1.5rem;
