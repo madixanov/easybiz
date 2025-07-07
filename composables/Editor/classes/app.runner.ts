@@ -5,7 +5,6 @@ import PanelsMods from "./addons/panels.addon";
 import ButtonMods from "./addons/button.addon";
 import ComponentsAddons from "./addons/component.addon";
 
-
 class Runner {
     constructor(private editor: Editor) {
         this.editor = editor;
@@ -19,7 +18,6 @@ class Runner {
             await new PanelsMods(this.editor);
             await new ComponentsAddons(this.editor);
         }, 300);
-
     }
 }
 
