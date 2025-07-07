@@ -121,7 +121,7 @@ const sign_up = async () => {
 
 <style lang="scss" scoped>
 .sign_up {
-  padding: 0 1.5rem;
+  padding: 2rem 1.5rem;
   position: fixed;
   left: 0;
   top: 0;
