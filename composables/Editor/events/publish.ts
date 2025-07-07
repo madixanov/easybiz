@@ -11,7 +11,6 @@ export async function publish(editor: Editor, is_product?: number) {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
         },
         body: undefined as any
     }
@@ -25,14 +24,14 @@ export async function publish(editor: Editor, is_product?: number) {
         css: editor.getCss() as string,
         styles: editor.Css.getRules() as any,
         sections: editor.getComponents(),
-        is_published: is_product == 1 ? 1 : 0,
+        isPublished: is_product == 1 ? 1 : 0,
     }
 
-    console.log(page.is_published)
+    console.log(page.isPublished)
 
     options.body = JSON.stringify(page);
 
-    const response = await apiDataFetch(USER_FETCH_HOST + "/projects/" + params.value.project_id + "/editor/" + params.value.page_id, options);
+    const response = await apiConstructorFetch("/api/pages", options);
     const data = await response.json();
 
     if (data.error) {

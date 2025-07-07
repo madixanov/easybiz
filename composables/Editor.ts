@@ -48,7 +48,7 @@ export const component = ref({
 export async function init() {
     // Загрузка меток перед инициализацией
     await getLabels(component.value);
-
+    
     // Инициализация редактора через GrapesJS
     const editor = grapesjs.init(component.value);
     // const editor = new EditorApp(component.value);

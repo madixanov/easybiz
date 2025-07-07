@@ -17,7 +17,6 @@ class ButtonMods {
 
         const handler = async () => {
             const components = this.editor.getComponents().toJSON();
-
             if (components.length === 0) {
                 alert("You can't publish an empty page!");
             } else {

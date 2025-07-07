@@ -22,14 +22,12 @@ class ComponentHandlerMods {
                 this.toggle();
             })
         }
-
     }
 
     toggle() {
         const projectComponents = document.querySelector(".project-components");
         projectComponents?.classList.toggle("active");
     }
-
 }
 
 export default ComponentsAddons;

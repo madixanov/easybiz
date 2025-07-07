@@ -8,12 +8,14 @@ class subComponentHandlerMods {
 
     init(projectSubcomponents: HTMLElement, cards: HTMLCollection) {
         Array.from(cards).forEach((card: any) => {
+            console.log(card)
             const isAlreadySet = card.dataset.listenerSet === "true";
             if (!isAlreadySet) {
                 card.addEventListener(
                     "click",
                     () => {
                         const htmlContent = card.getAttribute("data-html");
+                        console.log("htmlContent", htmlContent);
                         if (htmlContent) {
                             const blockId = this.current.currentTarget?.getAttribute("id");
                             const components = this._editor.getWrapper()?.find(`#${blockId}`) as any;
