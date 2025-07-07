@@ -12,10 +12,7 @@
                 </label>
                 <button class="login-button" @click="login">Вход</button>
             </div>
-<<<<<<< HEAD
-=======
             <p class="login-sign_up">Нет аккаунта? <nuxt-link class="login-sign_up-link" to="/sign-up">Зарегестрироваться</nuxt-link></p>
->>>>>>> master
         </div>
     </div>
 </template>
@@ -39,9 +36,6 @@ const user = ref({
 })
 
 const checkUserAlive = async (token: string) => {
-    // if (!token) {
-    //     return false;
-    // }
     const response = await apiDataFetch(`/users/get-my-data`, {
         method: 'GET',
         headers: {'Authorization': `Bearer ${token}`,'Content-Type': 'application/json',},
@@ -76,10 +70,7 @@ const login = async () => {
                     }
                     if (response.message) {
                         await PushNotification(response.message);
-<<<<<<< HEAD
-=======
                         localStorage.removeItem("userEmail");
->>>>>>> master
                     }
                 }
             })
@@ -87,11 +78,6 @@ const login = async () => {
         setActivityMiddleware(`Вошел в систему`, 'user_signed_up');
     }
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> master
 </script>
 
 <style lang="scss" scoped>
@@ -157,21 +143,6 @@ const login = async () => {
     }
 
     &-button {
-<<<<<<< HEAD
-        background: #e2f0fd;
-        color: #0054ff;
-        font-size: 1.5rem;
-        font-weight: 400;
-        line-height: 1.8rem;
-        letter-spacing: 0.01rem;
-        text-align: center;
-        border: none;
-        border-radius: .4rem;
-        width: 100%;
-        padding: 1.1rem 0;
-        margin-top: 1rem;
-    }
-=======
     background: rgba(34, 156, 57, 0.15);
     color: #229c39;
     font-size: 1.5rem;
@@ -203,6 +174,5 @@ const login = async () => {
       text-decoration: none;
     }
   }
->>>>>>> master
 }
 </style>

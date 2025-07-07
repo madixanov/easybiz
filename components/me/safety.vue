@@ -50,10 +50,7 @@
 </template>
 
 <script lang="ts" setup>
-<<<<<<< HEAD
-=======
 import { apiDataFetch } from "~/composables/Exports";
->>>>>>> master
 import { ref, computed, onUnmounted, defineProps } from "vue";
 import { FailedAlert, SuccessNotification } from "~/composables/Notification/list";
 

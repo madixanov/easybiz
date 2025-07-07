@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-.chat{
-    &-nav{
-=======
+
 .chat {
     &-wrapper {
         max-width: max-content;
@@ -12,7 +9,6 @@
 
     &-nav {
         width: 100%;
->>>>>>> master
         position: sticky;
         top: 0;
         left: 0;
@@ -20,27 +16,12 @@
         padding: 1rem .5rem;
         border-right: .1rem solid #E5E5E5;
 
-<<<<<<< HEAD
-        &-list{
-=======
         &-list {
->>>>>>> master
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-<<<<<<< HEAD
-        &-link{
-            padding: 1.35rem;
-            border-radius: .4rem;
-
-            &:hover{
-                background: #229c380e;
-            }
-
-            &.active{
-=======
         &-link {
             width: 100%;
             padding: 1.35rem;
@@ -51,7 +32,6 @@
             }
 
             &.active {
->>>>>>> master
                 background: #229C391A;
             }
         }

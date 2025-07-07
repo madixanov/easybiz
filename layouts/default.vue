@@ -34,11 +34,7 @@
               </div>
               <div class="mail-counter">
                 <img class="mail-tick" src="../assets/tick.svg" alt="" />
-<<<<<<< HEAD
-                <span  v-if="unread.length > 0">{{ unread.length }}</span>
-=======
                 <span v-if="unread.length > 0">{{ unread.length }}</span>
->>>>>>> master
               </div>
             </div>
             <span>
@@ -109,52 +105,6 @@
     <ProfileNav />
 
     <div class="wrapper-box">
-<<<<<<< HEAD
-      <div
-        class="chat-nav"
-        v-if="$router.currentRoute.value.path.includes('messages')"
-      >
-        <ul class="chat-nav-list">
-          <span class="nav-burger" @click="showAside()" v-html="burger"></span>
-          <nuxt-link
-            :to="`/messages/requests`"
-            class="chat-nav-link"
-            :class="
-              $router.currentRoute.value.path.includes('requests')
-                ? 'active'
-                : ''
-            "
-            ><span v-html="chats"></span
-          ></nuxt-link>
-          <nuxt-link
-            :to="`/messages/incoming`"
-            class="chat-nav-link"
-            :class="
-              $router.currentRoute.value.path.includes('incoming')
-                ? 'active'
-                : ''
-            "
-            ><span v-html="email"></span
-          ></nuxt-link>
-          <nuxt-link
-            :to="`/messages/saved`"
-            class="chat-nav-link"
-            :class="
-              $router.currentRoute.value.path.includes('saved') ? 'active' : ''
-            "
-            ><span v-html="star"></span
-          ></nuxt-link>
-          <nuxt-link
-            :to="`/messages/faq`"
-            class="chat-nav-link"
-            :class="
-              $router.currentRoute.value.path.includes('faq') ? 'active' : ''
-            "
-            ><span v-html="faq"></span
-          ></nuxt-link>
-        </ul>
-      </div>
-=======
       <div class="chat-wrapper">
         <div
           class="chat-nav"
@@ -211,8 +161,6 @@
           </ul>
         </div>
       </div>
-
->>>>>>> master
       <div class="content">
         <slot />
       </div>
@@ -320,11 +268,6 @@ onMounted(async () => {
   // audio.play();
   // document.body.appendChild(audio);
 });
-<<<<<<< HEAD
-
-onMounted(() => {});
-=======
->>>>>>> master
 </script>
 
 <style scoped lang="scss">
