@@ -4,7 +4,7 @@ export interface ProjectDto {
     id: string,
     name: string,
     urlPath: string,
-    globalStyles: string,
+    globalStyles: string | null,
     pages: PageInterface[] | []
 }
 
@@ -20,7 +20,7 @@ export interface PageInterface {
     css?: string,
     sections?: Components,
     fonts?: Fonts[] | [],
-    is_published?: number | boolean,
+    isPublished?: number | boolean,
 }
 
 interface Meta {

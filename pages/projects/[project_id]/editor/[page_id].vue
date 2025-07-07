@@ -15,13 +15,13 @@
         </div>
     </div>
 
-    <div class="project-components" @click.self="toggle()">
+    <!-- <div class="project-components active" @click.self="toggle()">
         <editor-models-components />
-    </div>
-
-    <!-- <div class="project-subcomponents" @click.self="toggle2()">
-        <editor-models-sub-components />
     </div> -->
+
+    <div class="project-subcomponents active" @click.self="toggle2()">
+        <editor-models-sub-components />
+    </div>
 
 </template>
 

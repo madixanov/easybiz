@@ -7,11 +7,10 @@ const getComponents = async () => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${localStorage.getItem("Authorization")}`
         }
     }
 
-    await apiConstructorFetch("/api/blocks/", options)
+    await apiConstructorFetch("/api/blocks", options)
         .then(response => response.json())
         .then(response => {
             const data = response;
@@ -69,10 +68,6 @@ const categoryFilter = (e: Event) => {
 onMounted(async () => {
     await getComponents();
 })
-
-onMounted(async () => {
-    await getComponents();
-})
 </script>
 
 <template>
@@ -95,9 +90,9 @@ onMounted(async () => {
             <aside class="components-aside">
                 <ul class="components-list">
                     <li class="components-item" v-for="item in components"
-                        :style="{ display: item.id === 'defaults' || item.components.length == 0 ? 'none' : 'block', color: 'black' }"
-                        :hidden="!item.components">
-                        <button @click="categoryFilter($event)" :data-category="item.id"
+                        :style="{ display: item.id === 'defaults' || item.length == 0 ? 'none' : 'block', color: 'black' }"
+                        :hidden="!item">
+                        <button @click="categoryFilter($event)" :data-category="`id${item.id}`"
                             class="components-linker bg-transparent text-stone-950 opacity-50 w-full text-xl text-start pt-4 pb-4 pl-6 pr-6">
                             {{ item.name }}
                         </button>
@@ -105,20 +100,21 @@ onMounted(async () => {
                 </ul>
             </aside>
             <div class="components-content">
-                <div class="components-cards" :id="item.id" v-for="item in components" :style="{
-                    display: item.components.length && item.id === 'defaults' ? 'flex' : 'none'
+                <div class="components-cards" :id="`id${item.id}`" v-for="item in components" :style="{
+                    display: !item.length ? 'flex' : 'none'
                 }">
                     <div class="components-card-main">
-                        <div class="components-card" :data-html="cmp.content" :area-id="`/default/${cmp.id}`"
-                            v-for="(cmp, cmpIndex) in item.components"
-                            :style="{ display: cmpIndex !== 3 ? 'block' : 'none' }">
+                        <div class="components-card" :data-html="item.content" :area-id="`/default/${item.id}`"
+                            v-for="(cmp, cmpIndex) in item"
+                            :style="{ display: 'block' }">
                             <div class="components-card-preview">
                                 <div class="components-card-icons">
                                     <i></i><i></i><i></i>
                                 </div>
                                 <!-- <span class="components-card-title text-sm">header:{{ cmpIndex + 1 }}</span> -->
                             </div>
-                            <img :src="cmp.label.replace('https://api-neotech-landing.neotech.uz', 'http://localhost:5003')" alt="">
+                            <!-- <img :src="cmp.label.replace('https://api-neotech-landing.neotech.uz', 'http://localhost:5003')" alt=""> -->
+                            <img :src="item.previewImageUrl" alt="">
                         </div>
                     </div>
                 </div>

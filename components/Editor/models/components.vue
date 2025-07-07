@@ -31,7 +31,7 @@ const getComponents = async () => {
   };
 
   try {
-    const response = await apiConstructorFetch("/api/blocks/", options);
+    const response = await apiConstructorFetch("/api/blocks", options);
     const data = await response.json();
     data.forEach((item: any) => {
         components.value.push(item);
@@ -44,7 +44,6 @@ const getComponents = async () => {
 const categoryFilter = (e: Event) => {
   const target = e.target as HTMLElement;
   const category = target?.dataset.category;
-  console.log("Category:", category);
 
   const buttons = document.querySelectorAll(".components-linker");
   buttons.forEach((button: any) => {
@@ -59,7 +58,6 @@ const categoryFilter = (e: Event) => {
   }
 
   const item = document.querySelector(`#${category}`);
-  console.log(item, "item");
   
   if (!item) {
     console.warn(`Element with id "${category}" not found.`);
@@ -127,11 +125,11 @@ onMounted(() => {
           :id="item.category"
           v-for="item in components"
           :style="{
-            display:
+            display: !item.length
             //   item.length && item.id !== 'defaults'
-                // ?
+                ?
                  'flex'
-                // : 'none',
+                : 'none',
           }"
         >
           <h3 class="components-card-name mt-2 text-sm">{{ item.name }}</h3>
@@ -140,15 +138,16 @@ onMounted(() => {
             class="components-card"
             v-for="(cmp, cmpIndex) in item"
             :style="{
-              display: /\d/.test(cmp.label) ? 'block' : 'none',
+              display: item.label ? 'block' : 'none',
+              // display: /\d/.test(item.label) ? 'block' : 'none',
               color: 'black',
             }"
-            :data-html="cmp.content"
+            :data-html="item.content"
             >
               <div class="components-card-preview">
                 <div class="components-card-icons"><i></i><i></i><i></i></div>
                 <span class="components-card-title text-sm"
-                  >header:{{ cmpIndex + 1 }}</span
+                  >header:{{ cmpIndex }}</span
                 >
               </div>
               <!-- <img v-if="cmp.label"
@@ -164,6 +163,7 @@ onMounted(() => {
                 "
                 alt=""
               /> -->
+              <img :src="item.previewImageUrl" alt="">
             </div>
           </div>
         </div>

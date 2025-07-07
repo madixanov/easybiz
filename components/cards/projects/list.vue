@@ -14,9 +14,7 @@ const getProjects = async () => {
             "Content-Type": "application/json",
         }
     }
-
     const response = await apiConstructorFetch(`/api/projects`, options);
-    console.log(response, 'res');
     const data = await response.json() as any;
     if (data.length > 0) {
         await data.forEach((item: any) => {
@@ -33,7 +31,6 @@ onMounted(async () => {
     setTimeout(() => {
         loader.value = false;
     }, 200);
-    console.log(projects.value.pages.length, 'projects')
 })
 </script>
 
@@ -53,7 +50,7 @@ onMounted(async () => {
             <nuxt-link class="project-card-main" :to="`/projects/${(card as any).id}/pages`">
                 <ui-loader :has-background="true" :height="'100%'" v-if="loader" />
                 <!-- <img src="https://picsum.photos/200" alt=""> -->
-                <img v-if="card.pages.length" :src="`https://api.screenshotone.com/take?access_key=Hm3GgEaIePutLw&url=${(card as any).nest}&ignore_host_errors=true&format=jpg&block_ads=true&block_cookie_banners=true&block_banners_by_heuristics=false&block_trackers=true&delay=2&timeout=60&response_type=by_format&image_quality=80`"
+                <img v-if="card.pages[0].isPublished" :src="`https://api.screenshotone.com/take?access_key=Hm3GgEaIePutLw&url=${(card as any).urlPath   }&ignore_host_errors=true&format=jpg&block_ads=true&block_cookie_banners=true&block_banners_by_heuristics=false&block_trackers=true&delay=2&timeout=60&response_type=by_format&image_quality=80`"
                     alt="PageImage">
                 <img v-else src="https://placehold.co/400x300?text=No+Pages&bg=cccccc&fg=000000" alt="" >
                 <span class="project-card-main-redirect">Перейти</span>
