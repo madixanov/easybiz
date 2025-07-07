@@ -28,6 +28,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if (to.name === "login" || to.name === "sign-up" || to.name === "sign-up-otp") {
             return true;
         }
-        return { path: "/sign-up" };
+        return { path: "/login" };
     }
 })
