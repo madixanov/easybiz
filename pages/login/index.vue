@@ -12,7 +12,7 @@
                 </label>
                 <button class="login-button" @click="login">Вход</button>
             </div>
-            <p class="login-sign_up">Нет аккаунта? <nuxt-link class="login-sign_up-link" to="/sign-up">Зарегестрироваться</nuxt-link></p>
+            <p class="login-sign_up">Нет аккаунта? <nuxt-link class="login-sign_up-link" to="/sign-up">Регистрация</nuxt-link></p>
         </div>
     </div>
 </template>
