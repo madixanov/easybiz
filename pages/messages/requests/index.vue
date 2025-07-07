@@ -169,15 +169,9 @@ onMounted(() => {
     border-radius: 1.2rem;
     overflow: hidden;
     position: relative;
-
-<<<<<<< HEAD
-    @media (max-width: 690px) {
-      overflow-x: auto;
-=======
     @media (max-width: 650px) {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
->>>>>>> master
     }
   }
 
@@ -187,13 +181,8 @@ onMounted(() => {
     font-family: Arial, sans-serif;
     background-color: #fff;
 
-<<<<<<< HEAD
-    @media (max-width: 690px) {
-      width: max-content;
-=======
     @media (max-width: 650px) {
       min-width: 65rem;
->>>>>>> master
     }
 
     &-col {
