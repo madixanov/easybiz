@@ -82,6 +82,7 @@ const login = async () => {
 
 <style lang="scss" scoped>
 .login {
+    padding: 0 1.5rem;
     position: fixed;
     left: 0;
     top: 0;

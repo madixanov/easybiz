@@ -160,6 +160,7 @@ const verifyOtp = async () => {
 
 <style lang="scss" scoped>
 .otp {
+  padding: 0 1.5rem;
   position: fixed;
   left: 0;
   top: 0;
