@@ -29,36 +29,12 @@
             placeholder="Введите пароль"
           />
         </label>
-        <label for="telegram">
-          <p class="sign_up-modal-title">Telegram</p>
-          <input
-            type="text"
-            id="telegram"
-            v-model="user.telegram"
-            placeholder="Введите свой никнейм"
-          />
-        </label>
-        <label for="instagram">
-          <p class="sign_up-modal-title">Instagram</p>
-          <input
-            type="text"
-            id="instagram"
-            v-model="user.instagram"
-            placeholder="Введите свой никнейм"
-          />
-        </label>
-        <label for="facebook">
-          <p class="sign_up-modal-title">Facebook</p>
-          <input
-            type="text"
-            id="facebook"
-            v-model="user.facebook"
-            placeholder="Введите свой никнейм"
-          />
-        </label>
         <button class="sign_up-button" @click="sign_up">Регистрация</button>
       </div>
-      <p class="sign_up-login">Уже существует аккаунт? <nuxt-link class="sign_up-login-link" to="/login">Войти</nuxt-link></p>
+      <p class="sign_up-login">
+        Уже существует аккаунт?
+        <nuxt-link class="sign_up-login-link" to="/login">Войти</nuxt-link>
+      </p>
     </div>
   </div>
 </template>
@@ -68,7 +44,6 @@ import { useRouter } from "vue-router";
 import { apiDataFetch } from "~/composables/Exports";
 import {
   FailedAlert,
-  PushNotification,
   SuccessNotification,
 } from "~/composables/Notification/list";
 import type { UserInterface } from "~/interface/me/user";
@@ -83,15 +58,12 @@ const user = ref<UserInterface>({
   username: "",
   email: "",
   password: "",
-  roleId: "5c8b772a-f59b-4737-bae3-f086c9fb0252",
-  telegram: "",
-  facebook: "",
-  instagram: "",
+  roleId: "6a774c83-36de-47d2-85ae-70cbf4e3b7e7",
   image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
 });
 
 const sign_up = async () => {
-  if (!user.value.username || !user.value.email || !user.value.password || !user.value.telegram || !user.value.instagram || !user.value.facebook) {
+  if (!user.value.username || !user.value.email || !user.value.password) {
     return FailedAlert("Заполните все поля!");
   } else {
     const options = {
@@ -101,20 +73,17 @@ const sign_up = async () => {
       },
       body: JSON.stringify(user.value),
     };
-
-    await apiDataFetch(`/users/sign-up`, options)
-      .then((response) => response.json())
-      .then(async (res) => {
-        if(res.error){
-            await FailedAlert(res.message);
-            return
-        }
-        await SuccessNotification(res.message);
-        localStorage.setItem("userEmail", res.data.email);
-        setTimeout(() => {
-            $router.push("/sign-up/otp");
-        }, 3000);
-      });
+    const res = await apiDataFetch(`/users/sign-up`, options);
+    const data = await res.json();
+    console.log(res, "response");
+    if (!res.ok) {
+      return FailedAlert(data.message);
+    }
+    await SuccessNotification(data.message);
+    localStorage.setItem("userEmail", data.data.email);
+    setTimeout(() => {
+      $router.push("/sign-up/otp");
+    }, 3000);
   }
 };
 </script>
@@ -183,7 +152,7 @@ const sign_up = async () => {
     }
   }
 
-   &-button {
+  &-button {
     background: rgba(34, 156, 57, 0.15);
     color: #229c39;
     font-size: 1.5rem;
@@ -197,12 +166,12 @@ const sign_up = async () => {
     padding: 1.1rem 0;
     margin-top: 1rem;
 
-    &:hover{
-        background: rgba(34, 156, 57, 0.2);
+    &:hover {
+      background: rgba(34, 156, 57, 0.2);
     }
   }
 
-  &-login{
+  &-login {
     margin-top: 2rem;
     font-size: 1.2rem;
     font-weight: 400;

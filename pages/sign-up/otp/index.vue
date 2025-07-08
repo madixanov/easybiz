@@ -1,10 +1,10 @@
 <template>
   <div class="otp">
     <div class="otp-box">
-      <div class="otp-modal" :style="{display: sended ? 'flex' : 'flex'}">
+      <div class="otp-modal" :style="{display: sended ? 'flex' : 'none'}">
         <label for="otp">
           <p class="otp-modal-title">Код подтверждения</p>
-          <span class="otp-timer" :style="{display: sended ? 'inline-block' : 'none'}">{{ formattedTime }}</span>
+          <span class="otp-timer" :style="{display: !sended ? 'inline-block' : 'none'}">{{ formattedTime }}</span>
           <div class="otp-modal-inputs">
             <input
               v-for="(digit, index) in digits"
@@ -27,19 +27,19 @@
         </button>
         <button class="otp-reset" :disabled="sended" @click="sendOtp">Повторно отправить код</button>
       </div>
-      <div class="otp-modal" :style="{display: !sended ? 'none' : 'none'}">
-        <label>
-          <p class="otp-modal-title">Отправить код для активации акаунта</p>
-        </label>
+      <div class="otp-modal" :style="{display: !sended ? 'flex' : 'none'}">
+        <p class="otp-modal-title">Отправить код для активации акаунта</p>
         <button class="otp-button" @click="sendOtp">
           Отправить код
         </button>
       </div>
+      <p class="otp-modal-title">Изменить <nuxt-link to="/sign-up" :style="{color: '#229c39'}">почту</nuxt-link></p>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+
 import { apiDataFetch } from "~/composables/Exports";
 import {
   FailedAlert,
@@ -61,7 +61,7 @@ const inputs = ref<HTMLInputElement[]>([]);
 
 const isValidOtp = computed(() => digits.value.every((d) => /^\d$/.test(d)));
 
-const totalSeconds = ref(10);
+const totalSeconds = ref(180);
 let interval: ReturnType<typeof setInterval> | undefined;
 const formattedTime = computed(() => {
   const minutes = Math.floor(totalSeconds.value / 60)
@@ -72,7 +72,7 @@ const formattedTime = computed(() => {
 });
 
 const startTimer = () => {
-  totalSeconds.value = 10;
+  totalSeconds.value = 180;
   sended.value = true;
 
   if (interval) clearInterval(interval);

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { apiConstructorFetch } from '~/composables/Exports'
 const components = ref([] as any);
+
 const getComponents = async () => {
     const options = {
         method: "GET",
@@ -79,9 +80,9 @@ onMounted(async () => {
             <aside class="components-aside">
                 <ul class="components-list">
                     <li class="components-item" v-for="item in components"
-                        :style="{ display: item.id === 'defaults' || item.components.length == 0 ? 'none' : 'block', color: 'black' }"
+                        :style="{ display: item.components.length == 0 ? 'none' : 'block', color: 'black' }"
                         :hidden="!item.components">
-                        <button @click="categoryFilter($event)" :data-category="item.id"
+                        <button @click="categoryFilter($event)" :data-category="`i${item.id}`"
                             class="components-linker bg-transparent text-stone-950 opacity-50 w-full text-xl text-start pt-4 pb-4 pl-6 pr-6">
                             {{ item.name }}
                         </button>
@@ -89,13 +90,13 @@ onMounted(async () => {
                 </ul>
             </aside>
             <div class="components-content">
-                <div class="components-cards" :id="item.id" v-for="item in components" :style="{
-                    display: item.components.length && item.id !== 'defaults' ? 'flex' : 'none'
+                <div class="components-cards" :id="`i${item.id}`" v-for="item in components" :style="{
+                    display: item.components.length ? 'flex' : 'none'
                 }">
                     <h3 class="components-card-name mt-2 text-sm">{{ item.name }}</h3>
                     <div class="components-card-main">
                         <div class="components-card" :data-html="cmp.content" v-for="(cmp, cmpIndex) in item.components"
-                            :style="{ display: /\d/.test(cmp.label) ? 'block' : 'none', color: 'black' }">
+                            :style="{ display: cmp.label ? 'block' : 'none', color: 'black' }">
                             <div class="components-card-preview">
                                 <div class="components-card-icons">
                                     <i></i><i></i><i></i>
