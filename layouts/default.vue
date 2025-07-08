@@ -72,11 +72,11 @@
               </ul>
             </span>
           </nuxt-link>
-          <nuxt-link :to="`/projects`">
+          <nuxt-link :to="`/generator`" :class="$router.currentRoute.value.path.includes('generator') ? 'active' : ''">
             <span>
               <img src="/assets/icons/navigation/pages.svg" alt="" />
             </span>
-            <p class="nav-item-name">Страницы</p>
+            <p class="nav-item-name">Продукты</p>
           </nuxt-link>
           <nuxt-link
             :to="`/me/edit`"
@@ -162,11 +162,12 @@
         </div>
       </div>
       <div class="content">
+        <ProductTabs :style="{display: $router.currentRoute.value.path.includes('/generator') ? 'flex': 'none'}"/>
         <slot />
       </div>
     </div>
   </div>
-  <SocketChannel />
+  <!-- <SocketChannel /> -->
 </template>
 
 <script lang="ts" setup>
@@ -178,6 +179,7 @@ import star from "@/assets/icons/chat/star.svg?raw";
 import faq from "@/assets/icons/chat/faq.svg?raw";
 import closer from "@/assets/x-close.svg?raw";
 import ProfileNav from "~/components/navigations/profile.vue";
+import ProductTabs from "~/components/navigations/productTabs.vue";
 import { PushNotification } from "~/composables/Notification/list";
 import { apiDataFetch } from "~/composables/Exports";
 // import { socket } from "~/composables/socket";
@@ -264,7 +266,7 @@ onMounted(async () => {
   // const url = '../assets/ringtone.mp3';
   // const audio = document.createElement("audio");
   // audio.src = url;
-  // audio.volume = 0.5;
+  // audio.volume = 1;
   // audio.play();
   // document.body.appendChild(audio);
 });

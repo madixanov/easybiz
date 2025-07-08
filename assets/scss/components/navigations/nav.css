@@ -20,6 +20,7 @@
     width: max-content;
     display: none;
     padding: 1.6rem 1.35rem;
+
     @media (max-width: 1024px) {
         display: block;
     }
@@ -95,7 +96,8 @@
     line-height: 2.1rem;
     font-weight: 500;
 
-    &.router-link-active {
+    &.router-link-active,
+    &.active {
         background: #229C391A;
         border-radius: .4rem;
 
