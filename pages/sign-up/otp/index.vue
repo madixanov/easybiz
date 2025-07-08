@@ -4,7 +4,7 @@
       <div class="otp-modal" :style="{display: sended ? 'flex' : 'none'}">
         <label for="otp">
           <p class="otp-modal-title">Код подтверждения</p>
-          <span class="otp-timer" :style="{display: !sended ? 'inline-block' : 'none'}">{{ formattedTime }}</span>
+          <span class="otp-timer" :style="{display: sended ? 'inline-block' : 'none'}">{{ formattedTime }}</span>
           <div class="otp-modal-inputs">
             <input
               v-for="(digit, index) in digits"
@@ -151,9 +151,7 @@ const verifyOtp = async () => {
     .then(async (res) => {
       sended.value = false;
       await SuccessNotification(res.message);
-      setTimeout(() => {
-        $router.push("/login");
-      }, 3000);
+      $router.push("/login");
     });
 };
 </script>
