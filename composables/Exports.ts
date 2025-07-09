@@ -7,7 +7,7 @@ export const uri = `${USER_FETCH_HOST}`
 export function apiDataFetch(url: string, options: RequestInit) {
     // const path = USER_FETCH_HOST + url; 
     const path = url; 
-    return fetch(path, options);
+    return fetch('/api' + path, options);
     // return true;
 }
 
