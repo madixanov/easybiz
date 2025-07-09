@@ -8,7 +8,10 @@
                 </label>
                 <label for="password">
                     <p class="login-modal-title">Пароль</p>
-                    <input type="text" id="password" v-model="user.password" placeholder="Введите пароль" />
+                    <div class="login-modal-wrapper">
+                        <input :type="showPass ? 'text': 'password'" id="password" v-model="user.password" placeholder="Введите пароль" />
+                        <span v-html="eye" class="login-modal-eye" :class="{show: showPass}" @click="toggle"></span>
+                    </div>
                 </label>
                 <button class="login-button" @click="login">Вход</button>
             </div>
@@ -18,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
+import eye from '~/assets/icons/eye.svg?raw';
 import { ref } from 'vue';
 import { apiDataFetch, uri } from '~/composables/Exports';
 import { setActivityMiddleware } from '~/middleware/history.activity';
@@ -28,7 +31,11 @@ definePageMeta({
     layout: "auth"
 })
 
-const $router = useRouter()
+const showPass = ref(false);
+
+const toggle = () => {
+    showPass.value = !showPass.value;
+};
 
 const user = ref({
     email: "",
@@ -56,7 +63,7 @@ const login = async () => {
             body: JSON.stringify(user.value)
         }
 
-        await apiDataFetch(`/users/sign-in`, options)
+        await apiDataFetch(`/auth/sign-in`, options)
             .then(response => response.json())
             .then(async response => {
                 const data = response;
@@ -116,7 +123,7 @@ const login = async () => {
         align-items: flex-start;
         flex-direction: column;
         justify-content: center;
-        row-gap: 2.4rem;
+        row-gap: 1rem;
 
         &-title {
             color: #000;
@@ -134,12 +141,43 @@ const login = async () => {
 
         & input {
             width: 100%;
-            padding: 0.7rem 1.6rem;
+            padding: 0.7rem 3.4rem 0.7rem 1.6rem;
             border: 0.1rem solid #e5e5e5;
             background: unset !important;
             border-radius: 0.4rem;
             outline: none;
             color: #000 !important;
+        }
+
+        &-wrapper{
+            position: relative;
+            width: 100%;
+        }
+
+        &-eye{
+            width: 3.6rem;
+            height: 100%;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            cursor: pointer;
+
+            &::after{
+                content: '';
+                position: absolute;
+                width: 2.2rem;
+                height: .2rem;
+                background: #4D4D4D;
+                top: 50%;
+                left: 20%;
+                transform: rotate(45deg);
+                display: none;
+            }
+            &.show{
+                &::after{
+                    display: block;
+                }
+            }
         }
     }
 

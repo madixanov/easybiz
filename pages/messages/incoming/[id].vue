@@ -29,7 +29,7 @@ const fetchChats = async () => {
     },
   };
   try {
-    const response = await apiDataFetch("/users/get-flows", options);
+    const response = await apiDataFetch("/chats/get-flows", options);
     if (!response.ok) throw new Error("Ошибка при получении чатов");
     const data: ChatItem[] = await response.json();
     chats.value = data;

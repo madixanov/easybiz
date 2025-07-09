@@ -65,7 +65,7 @@ const fetchSavedChats = async () => {
     },
   };
   try {
-    const response = await apiDataFetch("/users/favorites", options);
+    const response = await apiDataFetch("/chats/favorites", options);
     const data: SavedChatItem[] = await response.json();
     savedChats.value = data;
     chat.value = data.filter(fav => fav.messageId === $router.currentRoute.value.params.id);
@@ -83,7 +83,7 @@ const saveMessage = async (id: string)=>{
       Authorization: `Bearer ${localStorage.getItem("Authorization")}`,
     }
   };
-  await apiDataFetch(`/users/favorites/${id}`, options).then(res=>res.json()).then(res=> SuccessNotification(res.message))
+  await apiDataFetch(`/chats/favorites/${id}`, options).then(res=>res.json()).then(res=> SuccessNotification(res.message))
 }
 
 onMounted(() => {

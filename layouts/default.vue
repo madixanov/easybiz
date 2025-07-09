@@ -162,7 +162,7 @@
         </div>
       </div>
       <div class="content">
-        <ProductTabs :style="{display: $router.currentRoute.value.path.includes('/generator') ? 'flex': 'none'}"/>
+        <ProductTabs />
         <slot />
       </div>
     </div>
@@ -209,7 +209,7 @@ const messages = async () => {
       "Content-Type": "application/json",
     },
   };
-  await apiDataFetch("/users/get-flows", options)
+  await apiDataFetch("/chats/get-flows", options)
     .then((response) => response.json())
     .then((data) =>
       data.forEach((item: any) => {

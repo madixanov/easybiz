@@ -121,7 +121,7 @@ const sendOtp = async () => {
     }),
   };
 
-  await apiDataFetch(`/users/send-otp`, options)
+  await apiDataFetch(`/auth/send-otp`, options)
     .then((response) => response.json())
     .then(async (res) => {
       sended.value = true;
@@ -146,7 +146,7 @@ const verifyOtp = async () => {
     }),
   };
 
-  await apiDataFetch(`/users/verify-otp`, options)
+  await apiDataFetch(`/auth/verify-otp`, options)
     .then((response) => response.json())
     .then(async (res) => {
       sended.value = false;
@@ -188,7 +188,7 @@ const verifyOtp = async () => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 2.4rem;
+    row-gap: 1rem;
 
     &-title {
       text-align: center;

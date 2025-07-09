@@ -4,14 +4,14 @@
         <div class="dash-row">
           <UiLoader :height="'100%'" :has-background="false" v-if="!loaded" :style="{position: 'relative', height: '20rem'}" />
           <BestProduct :prod="products[0]" :title="'Самый продаваемый продукт'" :icon="'fa-dollar-sign'" :style="{
-                height: loaded ? 'auto' : '0',
+                height: loaded ? 'max-content' : '0',
                 opacity: loaded ? 1 : 0,
                 transition: 'opacity 500ms ease',
                 transitionDelay: '100ms'
             }"/>
           <UiLoader :height="'100%'" :has-background="false" v-if="!loaded" :style="{position: 'relative', height: '20rem'}" />
           <BestProduct :prod="products[1]"  :title="'Наиболле популярный продукт'" :icon="'fa-eye'" :style="{
-                height: loaded ? 'auto' : '0',
+                height: loaded ? 'max-content' : '0',
                 opacity: loaded ? 1 : 0,
                 transition: 'opacity 500ms ease',
                 transitionDelay: '100ms'

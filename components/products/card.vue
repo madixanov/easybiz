@@ -1,15 +1,10 @@
 <template>
   <div class="cards">
     <div class="cards-card" v-for="(item, index) in sortedData" :key="item.id">
-      <input
-        type="checkbox"
-        class="cards-card-checkbox"
-        :value="item.id"
-        :checked="selectedProducts.includes(item.id)"
-        @change="toggleCheckbox(item.id)"
-      />
-
-      <img :src="item.image" alt="Product Image" />
+      <input type="checkbox" class="cards-card-checkbox" :value="item.id" :checked="selectedProducts.includes(item.id)" @change="toggleCheckbox(item.id)"/>
+      <div class="cards-card-image">
+        <img :src="item.image" alt="Product Image" />
+      </div>
       <p class="cards-card-title">{{ item.products.slice(0, 22) }}</p>
       <span class="cards-card-price">${{ item.price }}</span>
     </div>
@@ -85,7 +80,7 @@ const toggleCheckbox = (id: string) => {
       border-radius: 0.6rem;
       overflow: hidden;
 
-      img {
+      & img {
         width: 100%;
         height: 100%;
         object-fit: contain;
@@ -96,7 +91,7 @@ const toggleCheckbox = (id: string) => {
     &-title {
       font-size: 1.2rem;
       line-height: 125%;
-      margin: 0.8rem 0;
+      margin: 0.8rem 0 2rem 0;
     }
 
     &-price {

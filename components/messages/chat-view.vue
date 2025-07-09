@@ -57,7 +57,7 @@ const getMessages = async ()=>{
       Authorization: `Bearer ${localStorage.getItem("Authorization")}`,
     },
   };
-  const res = await apiDataFetch('/users/get-message', options)
+  const res = await apiDataFetch('/chats/get-message', options)
   const data = await res.json();
   messages.value = data.filter((msg: any) => msg.sessionId === $router.currentRoute.value.params.id);
 
@@ -69,8 +69,8 @@ const getMessages = async ()=>{
     },
   };
   console.log(messages.value?.[0]);
-  await apiDataFetch(`/users/message-isRead/${messages.value?.[0].id}`, option)
-  await apiDataFetch(`/users/connect-chat/${messages.value?.[0].sessionId}`, option)
+  await apiDataFetch(`/chats/message-isRead/${messages.value?.[0].id}`, option)
+  await apiDataFetch(`/chats/connect-chat/${messages.value?.[0].sessionId}`, option)
 }
 
 
@@ -89,7 +89,7 @@ const sendMessage = async () => {
   };
 
   try {
-    const res = await apiDataFetch(`/users/send-message/${$router.currentRoute.value.params.id}`, options);
+    const res = await apiDataFetch(`/chats/send-message/${$router.currentRoute.value.params.id}`, options);
 
     if (!res.ok) {
       FailedAlert("Сообщение не отправилось");
@@ -111,7 +111,7 @@ const saveMessage = async (id: string)=>{
       Authorization: `Bearer ${localStorage.getItem("Authorization")}`,
     }
   };
-  await apiDataFetch(`/users/favorites/${id}`, options).then(res=>res.json()).then(res=> SuccessNotification(res.message))
+  await apiDataFetch(`/chats/favorites/${id}`, options).then(res=>res.json()).then(res=> SuccessNotification(res.message))
 }
 
 onMounted(()=>{

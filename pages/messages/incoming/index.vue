@@ -30,7 +30,7 @@ const fetchSavedChats = async () => {
     },
   };
   try {
-    const response = await apiDataFetch("/users/get-flows", options);
+    const response = await apiDataFetch("/chats/get-flows", options);
     const data: ChatItem[] = await response.json();
     chats.value = data;
     console.log(chats.value);

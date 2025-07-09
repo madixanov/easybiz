@@ -84,7 +84,7 @@ const getRequests = async () => {
   };
 
   try {
-    const res = await apiDataFetch("/users/get-flows", options);
+    const res = await apiDataFetch("/chats/get-flows", options);
     if (!res.ok) {
       console.log("Error: " + res.status);
       return;
@@ -117,7 +117,7 @@ const archiveChat = async () => {
   };
 
   try {
-    const res = await apiDataFetch(`/users/chat-session-archive/${requests.value[id.value - 1].id}`, options);
+    const res = await apiDataFetch(`/chats/chat-session-archive/${requests.value[id.value - 1].id}`, options);
     if (!res.ok) {
       console.log("Error: " + res.status);
       return;

@@ -8,10 +8,11 @@
         <button class="products-filter-button">Delete</button>
       </div>
       <div class="products-controller-display">
-        <button class="products-controller-display-button" @click="() => (isCarded = false)">table</button>
-        <button class="products-controller-display-button" @click="() => (isCarded = true)">carded</button>
+        <button class="products-controller-display-button" @click="() => (isCarded = false)" :style="{background: !isCarded ? '#e0e0e0': 'transparent'}"><span v-html="tableView"></span></button>
+        <button class="products-controller-display-button" @click="() => (isCarded = true)" :style="{background: isCarded ? '#e0e0e0': 'transparent'}"><span v-html="cardView"></span></button>
       </div>
     </div>
+    
     <ProductTable
       :products="products"
       :selected-products="selectedProducts"
@@ -25,12 +26,17 @@
       @update:selected-products="selectedProducts = $event"
       :style="{ display: isCarded ? 'flex' : 'none' }"
     />
+
+
   </div>
 </template>
 
 <script lang="ts" setup>
 import ProductTable from "~/components/products/table.vue";
 import CardedView from "~/components/products/card.vue";
+import tableView from "~/assets/icons/table-view.svg?raw";
+import cardView from "~/assets/icons/card-view.svg?raw";
+
 const isCarded = ref(false);
 interface Product {
   id: string;
@@ -132,7 +138,7 @@ const selectedProducts = ref<string[]>([]);
       overflow: hidden;
 
       &-button {
-        padding: .1rem;
+        padding: .5rem .8rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -168,7 +174,7 @@ const selectedProducts = ref<string[]>([]);
       }
 
       &:hover {
-        background-color: #fcfcfc;
+        background-color: #f1f1f1;
       }
     }
   }

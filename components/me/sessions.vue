@@ -18,7 +18,7 @@
               : addedPrefix + " " + new Date(session.date).toLocaleString()
           }}
         </p>
-        <button class="profile-label-session-delete" @click="$emit('alert', session.deviceType, session.id)">
+        <button v-if="i !== 0" class="profile-label-session-delete" @click="$emit('alert', session.deviceType, session.id)">
           <span v-html="trash"></span>
         </button>
       </div>

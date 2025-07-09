@@ -121,11 +121,11 @@ const onTap = async (date: string, type?: string, customDate?: { day: number; mo
 
   try {
     const [browsersRes, devicesRes, usersRes, timeRes, pagesRes] = await Promise.all([
-      apiDataFetch(`/users/browsers_statistics/${date}${query}`, options).then(res => res.json()),
-      apiDataFetch(`/users/devices-statistics/${date}${query}`, options).then(res => res.json()),
-      apiDataFetch(`/users/user-statistics/${date}${query}`, options).then(res => res.json()),
-      apiDataFetch(`/users/average-time-statistics/${date}${query}`, options).then(res => res.json()),
-      apiDataFetch(`/users/page-statistics/${date}${query}`, options).then(res => res.json())
+      apiDataFetch(`/statistics/browsers_statistics/${date}${query}`, options).then(res => res.json()),
+      apiDataFetch(`/statistics/devices-statistics/${date}${query}`, options).then(res => res.json()),
+      apiDataFetch(`/statistics/user-statistics/${date}${query}`, options).then(res => res.json()),
+      apiDataFetch(`/statistics/average-time-statistics/${date}${query}`, options).then(res => res.json()),
+      apiDataFetch(`/statistics/page-statistics/${date}${query}`, options).then(res => res.json())
     ]);
 
     statistics.value.pages = pagesRes.sort((a: any, b: any) => b.count - a.count);
@@ -160,7 +160,7 @@ const messages = async () => {
       Authorization: `Bearer ${localStorage.getItem("Authorization")}`,
     },
   };
-  const res = await apiDataFetch("/users/get-flows", options);
+  const res = await apiDataFetch("/chats/get-flows", options);
   const data = await res.json();
   statistics.value.messages = data;
 };

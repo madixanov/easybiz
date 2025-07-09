@@ -112,7 +112,7 @@ const getRequests = async () => {
 
   try {
     const res = await apiDataFetch(
-      `/users/get-message?sessionId=${$router.currentRoute.value.params.id}`,
+      `/chats/get-message?sessionId=${$router.currentRoute.value.params.id}`,
       options
     );
     if (!res.ok) {
@@ -141,7 +141,7 @@ const sendMessage = async () => {
 
   try {
     const res = await apiDataFetch(
-      `/users/send-message/${$router.currentRoute.value.params.id}`,
+      `/chats/send-message/${$router.currentRoute.value.params.id}`,
       options
     );
     if (!res.ok) {
@@ -168,7 +168,7 @@ const connectChat = async ()=>{
     },
   };
 
-  await apiDataFetch(`/users/connect-chat/${$router.currentRoute.value.params.id}`, options).then(res=> res.json()).then(res=>console.log(res))
+  await apiDataFetch(`/chats/connect-chat/${$router.currentRoute.value.params.id}`, options).then(res=> res.json()).then(res=>console.log(res))
 }
 onMounted(() => {
   connectChat()

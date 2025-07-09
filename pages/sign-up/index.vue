@@ -22,12 +22,20 @@
         </label>
         <label for="password">
           <p class="sign_up-modal-title">Пароль</p>
-          <input
-            type="text"
-            id="password"
-            v-model="user.password"
-            placeholder="Введите пароль"
-          />
+          <div class="sign_up-modal-wrapper">
+            <input
+              :type="showPass ? 'text' : 'password'"
+              id="password"
+              v-model="user.password"
+              placeholder="Введите пароль"
+            />
+            <span
+              v-html="eye"
+              class="sign_up-modal-eye"
+              :class="{ show: showPass }"
+              @click="toggle"
+            ></span>
+          </div>
         </label>
         <button class="sign_up-button" @click="sign_up">Регистрация</button>
       </div>
@@ -40,6 +48,7 @@
 </template>
 
 <script lang="ts" setup>
+import eye from "~/assets/icons/eye.svg?raw";
 import { useRouter } from "vue-router";
 import { apiDataFetch } from "~/composables/Exports";
 import {
@@ -47,6 +56,12 @@ import {
   SuccessNotification,
 } from "~/composables/Notification/list";
 import type { UserInterface } from "~/interface/me/user";
+
+const showPass = ref(false);  
+
+const toggle = () => {
+  showPass.value = !showPass.value;
+};
 
 const $router = useRouter();
 
@@ -58,7 +73,7 @@ const user = ref<UserInterface>({
   username: "",
   email: "",
   password: "",
-  roleId: "6a774c83-36de-47d2-85ae-70cbf4e3b7e7",
+  roleId: "5c8b772a-f59b-4737-bae3-f086c9fb0252",
   image: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
 });
 
@@ -73,7 +88,7 @@ const sign_up = async () => {
       },
       body: JSON.stringify(user.value),
     };
-    const res = await apiDataFetch(`/users/sign-up`, options);
+    const res = await apiDataFetch(`/auth/sign-up`, options);
     const data = await res.json();
     console.log(res, "response");
     if (!res.ok) {
@@ -125,7 +140,7 @@ const sign_up = async () => {
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    row-gap: 2.4rem;
+    row-gap: 1rem;
 
     &-title {
       color: #000;
@@ -143,12 +158,43 @@ const sign_up = async () => {
 
     & input {
       width: 100%;
-      padding: 0.7rem 1.6rem;
+      padding: 0.7rem 3.4rem 0.7rem 1.6rem;
       border: 0.1rem solid #e5e5e5;
       background: unset !important;
       border-radius: 0.4rem;
       outline: none;
       color: #000 !important;
+    }
+
+    &-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    &-eye {
+      width: 3.6rem;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      cursor: pointer;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 2.2rem;
+        height: 0.2rem;
+        background: #4d4d4d;
+        top: 50%;
+        left: 20%;
+        transform: rotate(45deg);
+        display: none;
+      }
+      &.show {
+        &::after {
+          display: block;
+        }
+      }
     }
   }
 
