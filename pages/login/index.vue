@@ -67,7 +67,6 @@ const login = async () => {
             .then(response => response.json())
             .then(async response => {
                 const data = response;
-
                 if (!response.error) {
                     localStorage.setItem("Authorization", data.accessToken);
                     const isAlive = await checkUserAlive(data.accessToken);
