@@ -32,6 +32,11 @@
         </div>
         <div class="request-info-date">{{ formatDate(chat[1]?.createdAt) }}</div>
       </div>
+
+      <!-- <div class="mail-media" :style="{display: images? 'none' : 'flex'}"> -->
+          <!-- <img :src="url" alt="image" > -->
+      <!-- </div> -->
+
       <textarea
         name="admin-reply"
         class="request-chat"
@@ -121,6 +126,8 @@ const getRequests = async () => {
     }
 
     const req = await res.json();
+    console.log(req);
+    
     req.forEach((el: Message) => chat.value.push(el));
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -159,6 +166,7 @@ const sendMessage = async () => {
     console.error("Error sending message:", error);
   }
 };
+
 const connectChat = async ()=>{
   const options = {
     method: "PATCH",
