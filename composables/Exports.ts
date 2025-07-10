@@ -11,6 +11,11 @@ export function apiDataFetch(url: string, options: RequestInit) {
     return fetch(path, options);
     // return true;
 }
+export function apiProductsFetch(url: string, options: RequestInit) {
+    // const path = PRODUCTS_URL + url; 
+    const path = url; 
+    return fetch(path, options);
+}
 
 export function apiConstructorFetch(url: string, options: RequestInit) {
     const path = CONSTRUCTOR_URL + url;

@@ -14,6 +14,13 @@
           {{ formatDate(chat[chat.length - 1]?.createdAt) }}
         </div>
       </div>
+
+      <div class="mail-media" :style="{display: chat[0]?.mediaUrl ? 'flex' : 'none'}">
+        <div class="mail-media-wrapper">
+          <img v-if="chat[0]?.mediaUrl" :src="chat[0]?.mediaUrl" alt="image" >
+        </div>
+      </div>
+
       <textarea
         name="sender"
         class="request-chat"
@@ -33,9 +40,11 @@
         <div class="request-info-date">{{ formatDate(chat[1]?.createdAt) }}</div>
       </div>
 
-      <!-- <div class="mail-media" :style="{display: images? 'none' : 'flex'}"> -->
-          <!-- <img :src="url" alt="image" > -->
-      <!-- </div> -->
+      <div class="mail-media" :style="{display: chat[1]?.mediaUrl ? 'flex' : 'none'}">
+        <div class="mail-media-wrapper">
+          <img v-if="chat[1]?.mediaUrl" :src="chat[1]?.mediaUrl" alt="image" @click="showModal(chat[1]?.mediaUrl)">
+        </div>
+      </div>
 
       <textarea
         name="admin-reply"
@@ -91,6 +100,8 @@ import {
   FailedAlert,
   SuccessNotification,
 } from "~/composables/Notification/list";
+import showModal from "~/composables/modals/showImage";
+
 const $router = useRouter();
 const message = ref(
   "Спасибо за ваш комментарий! Будем рады видеть ваши отзывы снова!"
@@ -124,10 +135,7 @@ const getRequests = async () => {
       console.log("Error: " + res.status);
       return;
     }
-
     const req = await res.json();
-    console.log(req);
-    
     req.forEach((el: Message) => chat.value.push(el));
   } catch (error) {
     console.error("Error fetching data:", error);

@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in products" :key="product.id">
+        <tr v-for="(product, i) in products" :key="product.id">
           <td>
             <input
               type="checkbox"
@@ -30,13 +30,13 @@
               @change="toggleSingle(product.id)"
             />
           </td>
-          <td>{{ product.id }}</td>
+          <td>{{ i + 1 }}</td>
           <td>
-            <img :src="product.image" alt="Product" class="product-image" />
+            <img :src="product.imageUrl" alt="Product" class="product-image" />
           </td>
-          <td>{{ product.producer }}</td>
-          <td>{{ product.products }}</td>
-          <td>{{ product.categories }}</td>
+          <td>{{ product.productManufacturer.name }}</td>
+          <td>{{ product.metaTitle }}</td>
+          <td>{{ product.category.name }}</td>
           <td>{{ product.link }}</td>
           <td>${{ product.price }}</td>
           <td><span class="edit-icon">✎</span></td>
