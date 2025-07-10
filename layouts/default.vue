@@ -2,105 +2,94 @@
   <UiLoader :height="'100%'" v-if="!loader" />
   <div class="wrapper">
     <div class="nav-wrapper">
-      <div class="nav">
-        <span @click="closeAside()" class="nav-closer" v-html="closer"></span>
-        <div class="nav-logo">
-          <nuxt-link to="/"> .tech </nuxt-link>
-        </div>
-        <ul class="nav-list">
-          <nuxt-link :to="`/`">
-            <span>
-              <img src="/assets/icons/navigation/stats.svg" alt="" />
-            </span>
-            <p class="nav-item-name">Дашбоард</p>
-          </nuxt-link>
-          <nuxt-link
-            class="mail-links"
-            :to="`/messages/`"
-            :class="
-              $router.currentRoute.value.path.includes('messages')
-                ? 'active'
-                : ''
-            "
-          >
-            <div class="origin mail">
-              <div class="origin-star">
-                <span>
-                  <img src="/assets/icons/navigation/messages.svg" alt="" />
-                </span>
-                <p class="nav-item-name">
-                  <span>Уведомления</span>
-                </p>
-              </div>
-              <div class="mail-counter">
-                <img class="mail-tick" src="../assets/tick.svg" alt="" />
-                <span v-if="unread.length > 0">{{ unread.length }}</span>
-              </div>
-            </div>
-            <span>
-              <ul class="sub-menu">
-                <li
-                  class="sub-menu-item"
-                  :class="
-                    $router.currentRoute.value.path.includes('requests')
-                      ? 'active'
-                      : ''
-                  "
-                >
-                  <nuxt-link :to="`/messages/requests`">Обращение</nuxt-link>
-                </li>
-                <li
-                  class="sub-menu-item"
-                  :class="
-                    $router.currentRoute.value.path.includes('incoming')
-                      ? 'active'
-                      : ''
-                  "
-                >
-                  <nuxt-link :to="`/messages/incoming`">Почта</nuxt-link>
-                </li>
-                <li
-                  class="sub-menu-item"
-                  :class="
-                    $router.currentRoute.value.path.includes('settings')
-                      ? 'active'
-                      : ''
-                  "
-                >
-                  <nuxt-link :to="`/messages/settings`">Настройки</nuxt-link>
-                </li>
-              </ul>
-            </span>
-          </nuxt-link>
-          <nuxt-link :to="`/generator`" :class="$router.currentRoute.value.path.includes('generator') ? 'active' : ''">
-            <span>
-              <img src="/assets/icons/navigation/pages.svg" alt="" />
-            </span>
-            <p class="nav-item-name">Продукты</p>
-          </nuxt-link>
-          <nuxt-link
-            :to="`/me/edit`"
-            :class="
-              $router.currentRoute.value.path.includes('/me/edit')
-                ? 'active'
-                : ''
-            "
-          >
-            <span>
-              <img src="/assets/icons/navigation/user.svg" alt="" />
-            </span>
-            <p class="nav-item-name">Профиль</p>
-          </nuxt-link>
-          <button data-type="logout" @click="logout">
-            <span>
-              <img src="/assets/icons/navigation/logout.svg" alt="" />
-            </span>
-            <p class="nav-item-name">Выйти</p>
-          </button>
-          <!-- Test -->
-        </ul>
+    <div class="nav">
+      <span @click="closeAside()" class="nav-closer" v-html="closer"></span>
+
+      <div class="nav-logo">
+        <nuxt-link to="/"> .tech </nuxt-link>
       </div>
+
+      <ul class="nav-list">
+        <nuxt-link :to="`/`">
+          <span>
+            <img src="/assets/icons/navigation/stats.svg" alt="" />
+          </span>
+          <p class="nav-item-name">{{ t('nav.dashboard') }}</p>
+        </nuxt-link>
+
+        <nuxt-link
+          class="mail-links"
+          :to="`/messages/`"
+          :class="$router.currentRoute.value.path.includes('messages') ? 'active' : ''"
+        >
+          <div class="origin mail">
+            <div class="origin-star">
+              <span>
+                <img src="/assets/icons/navigation/messages.svg" alt="" />
+              </span>
+              <p class="nav-item-name">
+                <span>{{ t('nav.notifications') }}</span>
+              </p>
+            </div>
+            <div class="mail-counter">
+              <img class="mail-tick" src="../assets/tick.svg" alt="" />
+              <span v-if="unread.length > 0">{{ unread.length }}</span>
+            </div>
+          </div>
+          <span>
+            <ul class="sub-menu">
+              <li
+                class="sub-menu-item"
+                :class="$router.currentRoute.value.path.includes('requests') ? 'active' : ''"
+              >
+                <nuxt-link :to="`/messages/requests`">{{ t('nav.requests') }}</nuxt-link>
+              </li>
+              <li
+                class="sub-menu-item"
+                :class="$router.currentRoute.value.path.includes('incoming') ? 'active' : ''"
+              >
+                <nuxt-link :to="`/messages/incoming`">{{ t('nav.incoming') }}</nuxt-link>
+              </li>
+              <li
+                class="sub-menu-item"
+                :class="$router.currentRoute.value.path.includes('settings') ? 'active' : ''"
+              >
+                <nuxt-link :to="`/messages/settings`">{{ t('nav.settings') }}</nuxt-link>
+              </li>
+            </ul>
+          </span>
+        </nuxt-link>
+
+        <nuxt-link
+          :to="`/generator`"
+          :class="$router.currentRoute.value.path.includes('generator') ? 'active' : ''"
+        >
+          <span>
+            <img src="/assets/icons/navigation/pages.svg" alt="" />
+          </span>
+          <p class="nav-item-name">{{ t('nav.products') }}</p>
+        </nuxt-link>
+
+        <nuxt-link
+          :to="`/me/edit`"
+          :class="$router.currentRoute.value.path.includes('/me/edit') ? 'active' : ''"
+        >
+          <span>
+            <img src="/assets/icons/navigation/user.svg" alt="" />
+          </span>
+          <p class="nav-item-name">{{ t('nav.profile') }}</p>
+        </nuxt-link>
+
+        <button data-type="logout" @click="logout">
+          <span>
+            <img src="/assets/icons/navigation/logout.svg" alt="" />
+          </span>
+          <p class="nav-item-name">{{ t('nav.logout') }}</p>
+        </button>
+        <!-- test -->
+      </ul>
     </div>
+  </div>
 
     <ProfileNav />
 
@@ -172,6 +161,7 @@
 
 <script lang="ts" setup>
 // import Loader from '~/components/ui/loader.vue';
+import { useI18n } from '#imports';
 import burger from "@/assets/burger.svg?raw";
 import chats from "@/assets/icons/chat/requests.svg?raw";
 import email from "@/assets/icons/chat/email.svg?raw";
@@ -185,6 +175,7 @@ import { apiDataFetch } from "~/composables/Exports";
 // import { socket } from "~/composables/socket";
 // import SocketChannel from '~/components/notifications/socket.channel.vue';
 
+const { t } = useI18n()
 const $router = useRouter();
 
 const count = ref(0);

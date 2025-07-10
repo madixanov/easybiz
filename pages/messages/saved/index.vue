@@ -8,7 +8,7 @@
     </aside>
 
     <div class="mail-box">
-      <h4 class="mail-chat-text">Нажмите на чат, чтобы прочитать сообщение</h4>
+      <h4 class="mail-chat-text">{{savedChats.length === 0 ? "Пока нет сохраненных сообщений" : 'Нажмите на чат, чтобы прочитать сообщение'}}</h4>
     </div>
   </div>
 </template>
@@ -17,12 +17,10 @@
 import { apiDataFetch } from "~/composables/Exports";
 import { ref, computed, onMounted } from 'vue';
 import ChatList from '~/components/messages/chat-list.vue';
-import ChatView from '~/components/messages/chat-view.vue';
 import type { ChatItem } from '~/interface/mail/Message';
 
 const savedChats = ref<ChatItem[]>([]);
 const activeChatId = ref<string | null>(null);
-const newMessage = ref('');
 const isDesktop = ref(true);
 
 const fetchSavedChats = async () => {
@@ -34,7 +32,7 @@ const fetchSavedChats = async () => {
     },
   };
   try {
-    const response = await apiDataFetch('/users/favorites', options);
+    const response = await apiDataFetch('/chats/favorites', options);
     const data: ChatItem[] = await response.json();
     savedChats.value = data;
     console.log(savedChats.value);

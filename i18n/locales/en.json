@@ -1,0 +1,68 @@
+{
+    "nav": {
+        "dashboard": "Dashboard",
+        "notifications": "Notifications",
+        "requests": "Requests",
+        "incoming": "Incoming",
+        "settings": "Settings",
+        "products": "Products",
+        "profile": "Profile",
+        "logout": "Logout",
+        "sub": {
+            "profile": {
+                "title": "Profile",
+                "main": "General",
+                "security": "Security"
+            },
+            "integrations": {
+                "title": "Integrations",
+                "socials": "Social Networks",
+                "analytics": "Analytics",
+                "payments": "Payments"
+            }
+        }
+    },
+    "dataStat": "No available data",
+    "dash": {
+        "title": "Statistics",
+        "traffic": "Traffic",
+        "users": "Users",
+        "submission": "Form Submission",
+        "average_time": "Average Time on Site",
+        "browsers": "Browsers",
+        "devices": "Devices",
+        "regions": "Regions",
+        "page_views": "Page Views",
+        "buttons": {
+            "day": "Daily",
+            "month": "Monthly",
+            "year": "Yearly"
+        }
+    },
+    "profile": {
+        "title_photo": "Your photo",
+        "name": "First name",
+        "lastname": "Last name",
+        "unavailable": "unavailable",
+        "lan": "Language",
+        "password": {
+            "enter_code": "Enter the code to change your password",
+            "code": "Enter code",
+            "sent": "The code has been sent to your email",
+            "pass": "Change password",
+            "pass_text": "New password",
+            "buttons": {
+                "send": "Send code",
+                "confirn": "Confirm",
+                "reset": "Resend code"
+            }
+        },
+        "sessions": "Sessions and devices",
+        "device": "Device",
+        "logged": "Logged in",
+        "buttons": {
+            "save": "Save",
+            "cancel": "Cancel"
+        }
+    }
+}

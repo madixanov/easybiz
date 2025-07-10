@@ -62,7 +62,7 @@ const onMouseLeave = () => {
     tooltip.value.top = 0;
     tooltip.value.left = 0;
 }
-
+const {t} = useI18n();
 
 onMounted(() => {
     getIcons()
@@ -71,7 +71,7 @@ onMounted(() => {
 
 <template>
     <div class="regions">
-        <h1 class="regions-title">Регион</h1>
+        <h1 class="regions-title">{{$t('dash.regions')}}</h1>
         <div class="regions-selector" ref="countries">
             <!-- <div class="regions-tooltip" v-if="abilityTooltip" :style="{
                 left: tooltip.left + 'px',

@@ -7,21 +7,19 @@
         :class="{ active: activeGroup === 'profile' }"
       >
         <img src="/assets/icons/navigation/user.svg" alt="" />
-        <h3>Профиль</h3>
+        <h3>{{ $t('nav.sub.profile.title') }}</h3>
       </div>
       <ul class="profile-nav-list">
         <a
           class="profile-nav-link"
           href="#profilemain"
           :class="{ active: activeId === 'profilemain'}"
-          >Основные</a
-        >
+        >{{ $t('nav.sub.profile.main') }}</a>
         <a
           class="profile-nav-link"
           href="#profilesecurity"
           :class="{ active: activeId === 'profilesecurity'}"
-          >Безопасность</a
-        >
+        >{{ $t('nav.sub.profile.security') }}</a>
       </ul>
     </div>
     <div class="profile-nav-section">
@@ -30,33 +28,32 @@
         :class="{ active: activeGroup === 'integrations' }"
       >
         <img src="/assets/icons/navigation/integration.svg" alt="" />
-        <h3>Интеграции</h3>
+        <h3>{{ $t('nav.sub.integrations.title') }}</h3>
       </div>
       <ul class="profile-nav-list">
         <a
           class="profile-nav-link"
           href="#integrationssocials"
           :class="{ active: activeId === 'integrationssocials' }"
-          >Социальные сети</a
-        >
+        >{{ $t('nav.sub.integrations.socials') }}</a>
         <a
           class="profile-nav-link"
           href="#integrationsanalytics"
           :class="{ active: activeId === 'integrationsanalytics' }"
-          >Аналитика</a
-        >
+        >{{ $t('nav.sub.integrations.analytics') }}</a>
         <a
           class="profile-nav-link"
           href="#integrationspayments"
           :class="{ active: activeId === 'integrationspayments' }"
-          >Платежи</a
-        >
+        >{{ $t('nav.sub.integrations.payments') }}</a>
       </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+
+const { t } = useI18n()
 import burger from  '@/assets/burger.svg?raw';
 import ScrollSections from '@/composables/navigation/ScrollSections'
 const showAside = ()=>{

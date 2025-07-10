@@ -2,7 +2,7 @@
     <div class="stats">
         <div class="stats-container">
             <header class="stats-header">
-                <h4 class="stats-heading">Браузеры</h4>
+                <h4 class="stats-heading">{{ $t('dash.browsers')}}</h4>
                 <!-- <div class="stats-header-buttons">
                     <button class="stats-header-button active">За день</button>
                     <button class="stats-header-button">За месяц</button>
@@ -34,10 +34,11 @@
             </div>
         </div>
     </div>
-    <div class="dash-block-nodata" v-if="props.agents.length === 0">No data available!</div>
+    <div class="dash-block-nodata" v-if="props.agents.length === 0">{{$t('dataStat')}}!</div>
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
 
 const props = defineProps({
     agents: {

@@ -1,7 +1,7 @@
 <template>
   <div class="profile-form">
     <label for="first-name" class="profile-label">
-      <p class="profile-label-title">Имя</p>
+      <p class="profile-label-title">{{ $t('profile.name')}}</p>
       <input
         id="first-name"
         type="text"
@@ -12,18 +12,18 @@
     </label>
 
     <label for="second-name" class="profile-label">
-      <p class="profile-label-title">Фамилия</p>
+      <p class="profile-label-title">{{ $t('profile.lastname')}}</p>
       <input
         id="second-name"
         type="text"
         class="profile-label-input"
         disabled
-        placeholder="(недоступно)"
+        :placeholder="$t('profile.unavailable')"
       />
     </label>
 
     <div class="profile-label">
-      <p class="profile-label-title">Язык интерфейса</p>
+      <p class="profile-label-title">{{ $t('profile.lan')}}</p>
       <div class="profile-label-options" @click="toggleDropdown">
         <div class="profile-label-selected">
           <img :src="selected.flag" />
@@ -46,8 +46,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
+const { locale, setLocale } = useI18n()
+
 interface LanguageOption {
-  code: string;
+  code:  'en' | 'ru' | 'de';
   label: string;
   flag: string;
 }
@@ -76,8 +79,14 @@ const toggleDropdown = () => {
 
 const selectLanguage = (lang: LanguageOption) => {
   selected.value = lang;
+  setLocale(lang.code);
   dropdownVisible.value = false;
 };
+
+onMounted(() => {
+  const current = languages.find(l => l.code === locale.value)
+  if (current) selected.value = current
+})
 </script>
 
 

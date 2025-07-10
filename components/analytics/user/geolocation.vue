@@ -8,7 +8,7 @@
 
         <div class="hst-container">
             <header class="stats-header">
-                <h4 class="stats-heading">Регионы</h4>
+                <h4 class="stats-heading">{{ $t('dash.regions') }}</h4>
                 <!-- <div class="stats-header-buttons">
                     <button class="stats-header-button active">За день</button>
                     <button class="stats-header-button">За месяц</button>
@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-
+const { t } = useI18n()
 const history = ref([])
 const loaded = ref(false);
 

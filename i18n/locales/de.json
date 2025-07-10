@@ -1,0 +1,69 @@
+{
+    "nav": {
+        "dashboard": "Dashboard",
+        "notifications": "Benachrichtigungen",
+        "requests": "Anfragen",
+        "incoming": "Eingehend",
+        "settings": "Einstellungen",
+        "products": "Produkte",
+        "profile": "Profil",
+        "logout": "Abmelden",
+        "sub": {
+            "profile": {
+                "title": "Profil",
+                "main": "Allgemein",
+                "security": "Sicherheit"
+            },
+            "integrations": {
+                "title": "Integrationen",
+                "socials": "Soziale Netzwerke",
+                "analytics": "Analyse",
+                "payments": "Zahlungen"
+            }
+        }
+    },
+    "dataStat": "Keine Daten",
+    "dash": {
+        "title": "Statistiken",
+        "traffic": "Besuche",
+        "users": "Benutzer",
+        "submission": "Formularanfrage",
+        "average_time": "Durchschnittliche Verweildauer",
+        "browsers": "Browser",
+        "devices": "Geräte",
+        "regions": "Regionen",
+        "page_views": "Seitenaufrufe",
+        "buttons": {
+            "day": "Täglich",
+            "month": "Monatlich",
+            "year": "Jährlich"
+        }
+    },
+    "profile": {
+        "title_photo": "Dein Foto",
+        "name": "Vorname",
+        "lastname": "Nachname",
+        "unavailable": "nicht verfügbar",
+        "lan": "Sprache",
+        "password": {
+            "enter_code": "Geben Sie den Code ein, um Ihr Passwort zu ändern",
+            "code": "Code eingeben",
+            "sent": "Der Code wurde an Ihre E-Mail gesendet",
+            "pass": "Passwort ändern",
+            "pass_text": "Neues Passwort",
+            "buttons": {
+                "send": "Code senden",
+                "confirn": "Bestätigen",
+                "reset": "Code erneut senden"
+            }
+        },
+        "sessions": "Sitzungen und Geräte",
+        "device": "Gerät",
+        "logged": "Angemeldet",
+        "buttons": {
+            "save": "Speichern",
+            "cancel": "Abbrechen"
+        }
+    }
+
+}

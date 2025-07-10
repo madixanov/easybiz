@@ -32,14 +32,16 @@ const ScrollSections = (activeId: Ref<string>, activeGroup: Ref<string>) => {
 
       if (this.visibleSections.size > 0) {
         const mostVisible = [...this.visibleSections.entries()].sort((a, b) => b[1] - a[1])[0]
-        this.callback(mostVisible[0])
-
+        const id = mostVisible[0]
+        this.callback(id)
+      
         if (id.startsWith('profile')) {
           activeGroup.value = 'profile'
         } else if (id.startsWith('integrations')) {
           activeGroup.value = 'integrations'
         }
       }
+      
     }
 
     disconnect() {

@@ -2,7 +2,7 @@
     <div class="stats">
         <div class="stats-container">
             <header class="stats-header">
-                <h4 class="stats-heading">Посещаемость</h4>
+                <h4 class="stats-heading">{{$t('dash.traffic')}}</h4>
                 <!-- <div class="stats-header-buttons">
                     <button class="stats-header-button active">За день</button>
                     <button class="stats-header-button">За месяц</button>
@@ -17,6 +17,7 @@
 </template>
 
 <script setup lang="ts">
+const {t} = useI18n();
 const props = defineProps({
     views: {
         type: Number,

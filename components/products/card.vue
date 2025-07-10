@@ -3,7 +3,7 @@
     <div class="cards-card" v-for="(item, index) in sortedData" :key="item.id">
       <input type="checkbox" class="cards-card-checkbox" :value="item.id" :checked="selectedProducts.includes(item.id)" @change="toggleCheckbox(item.id)"/>
       <div class="cards-card-image">
-        <img :src="item.image" alt="Product Image" />
+        <img :src="item.image" alt="Product Image" @click="showModal(item.image)"/>
       </div>
       <p class="cards-card-title">{{ item.products.slice(0, 22) }}</p>
       <span class="cards-card-price">${{ item.price }}</span>
@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import showModal from "~/composables/modals/showImage";
 
 const props = defineProps<{
   rows: Array<{

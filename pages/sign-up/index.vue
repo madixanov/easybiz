@@ -66,7 +66,7 @@ const toggle = () => {
 const $router = useRouter();
 
 definePageMeta({
-  layout: "auth",
+  layout: false,
 });
 
 const user = ref<UserInterface>({

@@ -1,6 +1,6 @@
 <template>
   <div class="uploader-wrapper">
-    <h2 class="uploader-wrapper-title">Your Photo</h2>
+    <h2 class="uploader-wrapper-title">{{ $t('profile.title_photo')}}</h2>
     <div class="uploader-avatars">
       <div
         class="avatar-preview main"
@@ -12,7 +12,7 @@
       >
         <img
           v-if="props.user?.image"
-          :src="`${USER_FETCH_HOST}:${PORT}/users/image/${props.user.image}`"
+          :src="`${USER_FETCH_HOST}/users/image/${props.user.image}`"
           alt="User Avatar"
         />
         <div v-else class="avatar-preview-icon">
@@ -54,6 +54,7 @@
 import { ref, defineProps, defineEmits } from 'vue';
 import { USER_FETCH_HOST, PORT } from '~/composables/Exports';
 import reload from '@/assets/icons/reload.svg?raw';
+const {t} = useI18n();
 const props = defineProps<{ user: any }>();
 const emit = defineEmits<{ (e: 'update-image', image: File): void }>();
 

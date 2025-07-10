@@ -6,6 +6,4 @@
 <script setup lang="ts">
 import Statistics from '~/components/collector/statistics.vue';
 </script>
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

@@ -48,7 +48,7 @@ import {
 const $router = useRouter();
 
 definePageMeta({
-  layout: "auth",
+  layout: false,
 });
 
 const localEmail = localStorage.getItem('userEmail')

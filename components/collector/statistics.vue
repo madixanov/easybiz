@@ -177,7 +177,6 @@ onMounted(() => {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 1.5rem;
     gap: 1.5rem;
 
     &-buttons[role="buttons"] {

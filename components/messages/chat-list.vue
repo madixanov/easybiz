@@ -5,7 +5,7 @@
       v-for="chat in chats"
       :key="chat.id"
       @click="() => $emit('select', chat.id)" 
-      :style="{opacity: chat.status === 'CLOSED' ? 0.5 : 1, display: chats.length === 0 ? 'none' : 'block'}"
+      :style="{opacity: chat.status === 'ACTIVE' ? 0.5 : 1, display: chats.length === 0 || chat.status === 'CLOSED'? 'none' : 'block'}"
     >
       <nuxt-link :to="`/messages/${route}/${chat.id}`" class="mail-sender-link" v-if="route === 'incoming'">
         <div class="mail-sender-text">
@@ -73,8 +73,6 @@ const props = defineProps<{
   chats: ChatItem[] | any[];
   route: string;
 }>();
-
-console.log('chats-list', props.chats)
 </script>
 
 <style lang="scss" scoped></style>

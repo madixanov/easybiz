@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { clearError } from '#app';
+import { useRouter } from 'vue-router';
 
 defineProps<{
   error: {
@@ -16,10 +16,13 @@ defineProps<{
   };
 }>();
 
+const router = useRouter();
+
 const handleClearError = () => {
-  clearError({ redirect: '/' });
+  router.push('/');
 };
 </script>
+
 
 <style scoped lang="scss">
 .error-page {

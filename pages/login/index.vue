@@ -28,7 +28,7 @@ import { setActivityMiddleware } from '~/middleware/history.activity';
 import { FailedAlert, PushNotification } from '~/composables/Notification/list';
 
 definePageMeta({
-    layout: "auth"
+    layout: false
 })
 
 const showPass = ref(false);

@@ -268,7 +268,12 @@
     &-buttons {
         display: none;
         align-items: center;
-        gap: 2rem;
+        gap: 1rem;
+
+        &-upload{
+            padding: 0 1rem;
+            cursor: pointer;
+        }
     }
 
     &-button {
@@ -282,6 +287,39 @@
 
         &:hover {
             background: #229c3823;
+        }
+    }
+
+    &-media{
+        margin-top: 1rem;
+        width: 100%;
+        height: auto;
+        display: flex;
+        gap: 1rem;
+
+        &-wrapper{
+            position: relative;
+            width: 5rem;
+            height: 5rem;
+            background: rgba(0, 0, 0, 0.03);
+            overflow: hidden;
+            border-radius: 0.8rem;
+            border: .1rem solid rgba(0, 0, 0, 0.06);
+
+            & .loader{
+                width: 100%;
+                height: 100%;
+                & svg{
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
+
+            & img{
+                width: 100%;
+                height: 100%;
+
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
   <div class="profile">
     <div class="profile-wrapper screen80">
       <div class="profile-section" id="profilemain">
-        <h3 class="profile-title">Основные</h3>
+        <h3 class="profile-title">{{ $t('nav.sub.profile.main')}}</h3>
         <MeUploader :user="user" @update-image="updateImage" />
         <UiLoader
           :height="'100%'"
@@ -13,7 +13,7 @@
         <MeForm v-if="loaded && user" v-model:username="user.username" />
       </div>
       <div class="profile-section" id="profilesecurity">
-        <h3 class="profile-title">Безопасность</h3>
+        <h3 class="profile-title">{{ $t('nav.sub.profile.security')}}</h3>
         <UiLoader
           :height="'100%'"
           style="position: relative"
@@ -27,21 +27,18 @@
         <MeSessions
           v-if="loaded"
           :sessions="sessions"
-          title="Сессии и устройства"
-          name-prefix="Мобильное устройство"
-          added-prefix="Вход выполнен"
           @alert="showAlert"
         />
       </div>
       <div class="profile-section" id="integrationssocials">
-        <h3 class="profile-title">Интеграции</h3>
+        <h3 class="profile-title">{{ $t('nav.sub.integrations.socials')}}</h3>
         <UiLoader
           :height="'100%'"
           style="position: relative"
           :has-background="false"
           v-if="!loaded"
         />
-        <MeIcons v-if="loaded" :telegram="user.telegram" :instagram="user.instagram"/>
+        <!-- <MeIcons v-if="loaded" :telegram="user.telegram" :instagram="user.instagram"/> -->
         <MeSocial
           v-if="loaded && user"
           v-model:telegram="user.telegram"
@@ -50,7 +47,7 @@
         />
       </div>
       <div class="profile-section" id="integrationsanalytics">
-        <h3 class="profile-title">Аналитика</h3>
+        <h3 class="profile-title">{{ $t('nav.sub.integrations.analytics')}}</h3>
         <UiLoader
           :height="'100%'"
           style="position: relative"
@@ -73,9 +70,9 @@
 
     <div class="profile-wrapper screen20">
       <div class="profile-buttons">
-        <button class="profile-buttons-btn" @click="save">Сохранить</button>
+        <button class="profile-buttons-btn" @click="save">{{ $t('profile.buttons.save')}}</button>
         <button class="profile-buttons-btn cancel" @click="cancel">
-          Отменить
+          {{ $t('profile.buttons.cancel')}}
         </button>
       </div>
     </div>
@@ -107,8 +104,8 @@ import type { SessionsInterface } from "~/interface/me/sessions";
 import Alert from "~/components/ui/modals/alert.vue";
 import { apiDataFetch } from "~/composables/Exports";
 import { FailedAlert, PushNotification, SuccessNotification } from "~/composables/Notification/list";
+const {t} = useI18n();
 const loaded = ref(false);
-
 const sessionId = ref("");
 const item = ref("");
 const alert = ref(false);
@@ -192,7 +189,8 @@ const updateImage = async (newImage: File) => {
   try {
     const res = await apiDataFetch('/users/upload', options);
     const data = await res.json();
-
+    console.log(data, 'res image');
+    
     if (res.ok && data) {
       const url = data.data.trim();
       const fileName = url.split('/').pop();
@@ -266,7 +264,6 @@ const save = async () => {
 
 const cancel = () => {
   user.value = JSON.parse(JSON.stringify(originalUser.value));
-  console.log(user.value, "user after cancel");
 };
 
 onMounted(async () => {

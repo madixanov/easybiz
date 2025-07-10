@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import AddProductModal from "~/components/products/window/addProduct.vue";
+import AddProductModal from "~/components/ui/modals/addProduct.vue";
 
 const show = ref(false);
 const toggle = () => {
@@ -27,7 +27,7 @@ const toggle = () => {
 .product-tabs {
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 
   &-wrapper {
     height: auto;

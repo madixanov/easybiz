@@ -12,11 +12,12 @@
             </div>
         </div>
     </div>
-    <div class="dash-block-nodata" v-if="props.data.length === 0">No data available!</div>
+    <div class="dash-block-nodata" v-if="props.data.length === 0">{{ $t('dataStat') }}!</div>
 </template>
 
 <script setup lang="ts">
 import icon from '@/assets/neo.svg?raw';
+const {t} = useI18n();
 const props = defineProps({
     data: {
         type: Array<any>,

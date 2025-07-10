@@ -39,7 +39,7 @@
                 <UsersBrowsersCounter v-if="loaded" :agents="stats.browsers" />
             </div>
             <div class="dash-block-nest">
-                <h4 class="dash-block-nest-title">Устройства</h4>
+                <h4 class="dash-block-nest-title">{{ $t('dash.devices')}}</h4>
                 <UiLoader :height="'100%'" :has-background="false" v-if="!loaded" :style="{position: 'relative', height: '15rem'}" />
                 <Doughnut :data="stats.devices" v-if="loaded" />
             </div>
@@ -50,7 +50,7 @@
             </div> -->
 
             <div class="dash-block-nest">
-                <h4 class="dash-block-nest-title">Просмотры страниц</h4>
+                <h4 class="dash-block-nest-title">{{ $t('dash.page_views')}}</h4>
                 <UiLoader :height="'100%'" :has-background="false" v-if="!loaded" :style="{position: 'relative', height: '15rem'}" />
                 <UserVisits v-if="loaded" :data="props.stats.pages"/>    
             </div>
@@ -73,6 +73,8 @@ import UsersViewStats from '../analytics/user/views.vue';
 import UserVisits from '../analytics/user/visits.vue';
 
 import Doughnut from '../ui/doughnut.vue';
+
+const {t} = useI18n();
 
 const getRanHex = () => `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0")}`;
 const countries = [

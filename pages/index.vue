@@ -7,7 +7,7 @@
           @click="showAside()"
           v-html="burger"
         ></span>
-        <h2 class="dash-heading">Статистика</h2>
+        <h2 class="dash-heading">{{$t('dash.title')}}</h2>
       </div>
       <div class="dash-header-buttons">
         <div class="dash-header-button-dates" ref="dates">
@@ -17,7 +17,7 @@
             :class="{ active: selectedFilter === 'day' }"
             @click="onTap('day', selectedType)"
           >
-            За день
+          {{$t('dash.buttons.day')}}
           </button>
           <button
             class="dash-header-button-date"
@@ -25,7 +25,7 @@
             :class="{ active: selectedFilter === 'month' }"
             @click="onTap('month', selectedType)"
           >
-            За месяц
+          {{$t('dash.buttons.month')}}
           </button>
           <button
             class="dash-header-button-date"
@@ -33,7 +33,7 @@
             :class="{ active: selectedFilter === 'year' }"
             @click="onTap('year', selectedType)"
           >
-            За год
+          {{$t('dash.buttons.year')}}
           </button>
           <div class="dash-header-calendar">
             <!-- <UiDatepicker :stat="statistics" /> -->
@@ -66,7 +66,7 @@ import {apiDataFetch} from "@/composables/Exports";
 import burger from "@/assets/burger.svg?raw";
 import laptop from "@/assets/laptop.svg?raw";
 import phone from "@/assets/phone.svg?raw";
-
+const { t } = useI18n()
 const dates = ref();
 const selectedFilter = ref("day");
 const selectedType = ref("DESKTOP");

@@ -8,7 +8,7 @@
     </aside>
 
     <div class="mail-box">
-      <h4 class="mail-chat-text">Нажмите на чат, чтобы прочитать сообщение</h4>
+      <h4 class="mail-chat-text">{{chats.length === 0 ? "Пока нет входящих сообщений" : 'Нажмите на чат, чтобы прочитать сообщение'}}</h4>
     </div>
   </div>
 </template>

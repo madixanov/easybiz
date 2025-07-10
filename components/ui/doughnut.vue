@@ -18,11 +18,12 @@
     </div>
   </div>
   <h4 class="dash-block-nodata" v-if="!calculations.length">
-    No data available!
+   {{$t('dataStat')}}!
   </h4>
 </template>
 
 <script setup lang="ts">
+const {t} = useI18n();
 // import { Chart, DoughnutController, ArcElement, Tooltip, Legend, type ChartItem, type ChartConfiguration } from 'chart.js'
 
 // Chart.register(DoughnutController, ArcElement, Tooltip, Legend)

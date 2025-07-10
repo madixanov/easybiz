@@ -13,21 +13,21 @@
     </label> -->
 
     <label for="reset" class="profile-label media" v-if="success">
-      <p class="profile-label-title">Изменить пароль</p>
+      <p class="profile-label-title">{{$t("profile.password.pass")}}</p>
       <input
         id="reset"
         type="text"
         class="profile-label-input"
-        placeholder="Новый пароль"
+        :placeholder="$t('profile.password.pass_text')"
         v-model="newPassword"
       />
-      <button class="profile-label-verify" @click="reset">Подтвердить</button>
+      <button class="profile-label-verify" @click="reset">{{$t("password.buttons.confirm")}}</button>
     </label>
 
     <label for="otp" class="profile-label full" v-if="!success">
       <p class="profile-label-title">
-        Введите код для изменения пароля
-        <span v-if="sended">Код отправлен на почту {{ email }}</span>
+        {{ $t('profile.password.enter_code') }}
+        <span v-if="sended">{{ $t('profile.password.sent') }} {{ email }}</span>
       </p>
       <div class="profile-label-otp">
         <input
@@ -35,15 +35,15 @@
           type="text"
           class="profile-label-input"
           maxlength="6"
-          placeholder="Введите код"
+          :placeholder="$t('profile.password.code')"
           v-model="otp"
         />
         <span class="profile-label-timer" v-if="sended">{{ formattedTime }}</span>
       </div>
       <div class="profile-label-btn">
-        <button v-if="!sended" @click="sendOtp">Отправить код</button>
-        <button v-else-if="otp.length === 6" @click="verifyOtp">Подтвердить</button>
-        <button v-else disabled class="disabled">Повторить код</button>
+        <button v-if="!sended" @click="sendOtp">{{$t("profile.password.buttons.send")}}</button>
+        <button v-else-if="otp.length === 6" @click="verifyOtp">{{$t("profile.password.buttons.confirm")}}</button>
+        <button v-else disabled class="disabled">{{$t("profile.password.buttons.reset")}}</button>
       </div>
     </label>
   </div>
@@ -53,6 +53,7 @@
 import { apiDataFetch } from "~/composables/Exports";
 import { ref, computed, onUnmounted, defineProps } from "vue";
 import { FailedAlert, SuccessNotification } from "~/composables/Notification/list";
+const {t} = useI18n()
 
 const props = defineProps<{
   email: undefined | string;

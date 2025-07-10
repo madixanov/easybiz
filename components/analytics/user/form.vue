@@ -2,7 +2,7 @@
     <div class="stats" v-if="loaded">
         <div class="stats-container">
             <header class="stats-header">
-                <h4 class="stats-heading">Заявка на форму</h4>
+                <h4 class="stats-heading">{{ $t('dash.submission')}}</h4>
                 <!-- <div class="stats-header-buttons">
                     <button class="stats-header-button active">За день</button>
                     <button class="stats-header-button">За месяц</button>
@@ -20,12 +20,12 @@
 <script setup lang="ts">
 const counter = ref(0)
 const loaded = ref(false)
-
+const { t } = useI18n()
 interface Messages {
   id: string;
-  admin: Array;
+  admin?: Array<any>;
   adminId: string;
-  client: Array;
+  client?: Array<any>;
   clientId: string;
   createdAt: string; 
   updatedAt: string;
