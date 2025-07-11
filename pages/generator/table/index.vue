@@ -3,16 +3,34 @@
     <div class="products-controller">
       <p class="products-controller-title">Продукты</p>
       <div class="products-filter">
-        <button class="products-filter-button">Filter</button>
-        <button class="products-filter-button">Search</button>
-        <button class="products-filter-button">Delete</button>
+        <button class="products-filter-button" @click="toggle">Filter</button>
+        <!-- <button class="products-filter-button">Search</button> -->
+        <button
+          class="products-filter-button"
+          :disabled="selectedProducts.length === 0"
+          @click="showAlert"
+        >
+          Delete
+        </button>
       </div>
       <div class="products-controller-display">
-        <button class="products-controller-display-button" @click="() => (isCarded = false)" :style="{background: !isCarded ? '#e0e0e0': 'transparent'}"><span v-html="tableView"></span></button>
-        <button class="products-controller-display-button" @click="() => (isCarded = true)" :style="{background: isCarded ? '#e0e0e0': 'transparent'}"><span v-html="cardView"></span></button>
+        <button
+          class="products-controller-display-button"
+          @click="() => (isCarded = false)"
+          :style="{ background: !isCarded ? '#e0e0e0' : 'transparent' }"
+        >
+          <span v-html="tableView"></span>
+        </button>
+        <button
+          class="products-controller-display-button"
+          @click="() => (isCarded = true)"
+          :style="{ background: isCarded ? '#e0e0e0' : 'transparent' }"
+        >
+          <span v-html="cardView"></span>
+        </button>
       </div>
     </div>
-    
+
     <ProductTable
       :products="prod"
       :selected-products="selectedProducts"
@@ -27,24 +45,78 @@
       :style="{ display: isCarded ? 'flex' : 'none' }"
     />
   </div>
+  <ProductsFilter
+    :class="{ active: show }"
+    @close="toggle"
+    :values="filter"
+    @submit="submitFilter"
+  />
+  <transition name="fade">
+    <DeleteAlert
+      v-if="alert"
+      :name="'товар'"
+      :item="''"
+      @close="showAlert"
+      @delete="deleteProduct"
+    />
+  </transition>
 </template>
 
 <script lang="ts" setup>
+import Products from "@/composables/modals/products";
 import type { ProductDto } from "~/interface/products/product";
-import Products from "~/composables/modals/products";
+import ProductsFilter from "~/components/ui/modals/products/filter.vue";
 import ProductTable from "~/components/products/table.vue";
+import DeleteAlert from "~/components/ui/modals/alert.vue";
 import CardedView from "~/components/products/card.vue";
 import tableView from "~/assets/icons/table-view.svg?raw";
 import cardView from "~/assets/icons/card-view.svg?raw";
+import { SuccessNotification } from "~/composables/Notification/list";
+
+const filter = ref({
+  minPrice: 10,
+  maxPrice: 1000,
+});
 
 const isCarded = ref(false);
 
+const alert = ref(false);
+const show = ref(false);
+const toggle = () => {
+  show.value = !show.value;
+};
+const showAlert = () => {
+  alert.value = !alert.value;
+};
+
+const submitFilter = async (updatedFilter: {
+  minPrice: number;
+  maxPrice: number;
+}) => {
+  show.value = false;
+  filter.value = updatedFilter;
+  prod.value = [];
+  await new Products(prod.value).get(
+    updatedFilter.minPrice,
+    updatedFilter.maxPrice
+  );
+};
+
 const prod = ref<ProductDto[]>([]);
-const getProducts = async ()=>{
+const getProducts = async () => {
   await new Products(prod.value).get();
-}
+};
 
 const selectedProducts = ref<string[]>([]);
+const deleteProduct = async () => {
+  const res = await new Products().delete(selectedProducts.value[0]);
+  if (res.ok) {
+    selectedProducts.value = [];
+    SuccessNotification("Продукт успешно удален");
+    alert.value = false;
+    getProducts();
+  }
+};
 
 onMounted(() => {
   getProducts();
@@ -81,7 +153,7 @@ onMounted(() => {
       overflow: hidden;
 
       &-button {
-        padding: .5rem .8rem;
+        padding: 0.5rem 0.8rem;
         display: flex;
         align-items: center;
         justify-content: center;

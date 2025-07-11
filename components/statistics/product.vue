@@ -5,14 +5,14 @@
     </header>
     <section class="dash-widget-content">
       <div class="dash-widget-media">
-        <img :src="prod.url" alt="Product Image" v-if="prod.url && prod.url.length > 0" />
-        <img :src="'https://placehold.co/300x300?text=No+Image'" alt="Unavailable" v-else />
+        <img :src="prod.imageUrl.replace('https://via.placeholder.com','https://placehold.co')" alt="Product Image" v-if="prod.imageUrl && prod.imageUrl.length > 0" />
+        <img :src="'https://placehold.co/300x300?text=No+Data'" alt="Unavailable" v-else />
       </div>
       <div class="dash-widget-data">
         <p class="dash-widget-data-item title">
-          <i :class="`fas fa-solid ${icon}`"></i> {{ prod.price }}
+          <i :class="`fas fa-solid ${icon}`" v-if="prod.profit"></i> {{ prod.profit }}
         </p>
-        <p class="dash-widget-data-item">3.4%</p>
+        <p class="dash-widget-data-item" v-if="prod.priority">{{prod.priority.toFixed(1)}}%</p>
       </div>
     </section>
   </div>
@@ -20,15 +20,9 @@
 
 <script lang="ts" setup>
 const complete = ref(false);
-interface ProductDto {
-  title: string;
-  price: number;
-  url: string;
-  id: number;
-}
 const props = defineProps({
   prod: {
-    type: Object as PropType<ProductDto>,
+    type: Object as PropType<any>,
     required: true,
   },
   title: {

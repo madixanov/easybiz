@@ -5,27 +5,33 @@ export class Products {
         this.collector = collector || [];
     }
 
-    public async get() {
+    public async get(minPrice?: number, maxPrice?: number) {
+        this.collector.length = 0;
+
+        let query = "";
+        if (minPrice !== undefined && maxPrice !== undefined) {
+            query = `?ProductFilter.MinimumPrice=${minPrice}&ProductFilter.MaximumPrice=${maxPrice}`;
+        }
+
         const options = {
-            method: 'GET',
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
-            }
+            },
         };
-        const response = await apiProductsFetch('/api/products', options);
+
+        const response = await apiProductsFetch(`/api/products${query}`, options);
         const data = await response.json();
 
         data.forEach((product: ProductDto) => {
-
-            if (product.imageUrl?.startsWith('https://via.placeholder.com/')) {
-              product.imageUrl = product.imageUrl.replace('https://via.placeholder.com/', 'https://placehold.co/');
+            if (product.imageUrl?.startsWith("https://via.placeholder.com/")) {
+                product.imageUrl = product.imageUrl.replace("https://via.placeholder.com/", "https://placehold.co/");
             }
-        
-            this.collector.push(product);
-          });
-        
-          return this.collector;
 
+            this.collector.push(product);
+        });
+
+        return this.collector;
     }
 
     public async getProduct(id: any) {
@@ -55,5 +61,16 @@ export class Products {
 
         return data;
     }
+
+        public async delete(id: string | string[]) {
+            const options = {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+            const res = await apiProductsFetch(`/api/products/${id}`, options)
+            return res
+        }
 }
 export default Products;

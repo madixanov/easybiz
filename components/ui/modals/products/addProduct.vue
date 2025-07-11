@@ -5,6 +5,7 @@ import Products from "~/composables/modals/products";
 const emits = defineEmits(["close"]);
 const activeIndex = ref(0);
 const isFilled = ref(false);
+
 const productParams = ref({
   model: "",
   priority: 0,
@@ -71,7 +72,7 @@ const createProduct = async () => {
   transition: 300ms;
   opacity: 0;
   visibility: hidden;
-  z-index: -2;
+  z-index: 0;
 
   &-container {
     width: 100%;

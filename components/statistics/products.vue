@@ -7,15 +7,15 @@
       <ul class="dash-widget-ul">
         <li
           class="dash-widget-item"
-          v-for="(item, i) in prod.sort((a: any, b: any) => b.price - a.price).slice(0, 10)"
+          v-for="(item, i) in prod"
           :key="i"
         >
           <div class="dash-widget-item-block">
             <div class="dash-widget-item-image">
-              <img :src="item.url" alt="Product Image" v-if="item.url && item.url.length > 0">
+              <img :src="item.imageUrl.replace('https://via.placeholder.com','https://placehold.co')" alt="Product Image" v-if="item.imageUrl && item.imageUrl.length > 0">
               <img src="https://placehold.co/300x300?text=No+Image" alt="Unavailable" v-else>
             </div>
-            <span>{{item.title.slice(0, 24).trim() +(item.title.length > 20 ? "..." : "")}}</span>
+            <span>{{item.metaTitle.slice(0, 24).trim() +(item.metaTitle.length > 20 ? "..." : "")}}</span>
           </div>
           <span v-if="item.price" class="dash-widget-item-price">${{ item.price.toFixed(2) }}</span>
         </li>

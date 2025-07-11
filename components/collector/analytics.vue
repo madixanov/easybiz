@@ -215,9 +215,7 @@ onMounted(async () => {-
         setTimeout(() => {
             loaded.value = true;
         }, 1000);
-    // }, 500);
 })
-
 </script>
 
 <style scoped lang="scss">

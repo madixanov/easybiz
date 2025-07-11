@@ -7,17 +7,17 @@
       <ul class="dash-widget-ul">
         <li
           class="dash-widget-item"
-          v-for="(item, i) in cat.sort((a: any, b: any) => b.price - a.price).slice(0, 10)"
+          v-for="(item, i) in cat"
           :key="i"
         >
           <div class="dash-widget-item-block">
             <span class="dash-widget-item-rating" :class="{'bg-gold': i === 0,'bg-silver': i === 1,'bg-bronze': i === 2}">{{ i + 1 }} </span>
             <span>{{
-              item.title.slice(0, 24).trim() +
-              (item.title.length > 20 ? "..." : "")
+              item.name.slice(0, 24).trim() +
+              (item.name.length > 20 ? "..." : "")
             }}</span>
           </div>
-          <span v-if="item.price" class="dash-widget-item-price">${{ item.price}}</span>
+          <span class="dash-widget-item-price">${{ item.totalProfit }}</span>
         </li>
       </ul>
     </section>
@@ -25,9 +25,10 @@
 </template>
 
 <script lang="ts" setup>
+
 const props = defineProps({
   cat: {
-    type: Array<any>,
+    type: Array as PropType<any>,
     required: true,
   },
   title: {
@@ -39,6 +40,8 @@ const props = defineProps({
     default: 25,
   },
 });
+console.log(props.cat, 'cat');
+
 </script>
 
 <style lang="scss" scoped>
@@ -122,7 +125,7 @@ const props = defineProps({
       &-price {
         height: max-content;
         line-height: 100%;
-        padding: 0.2rem 0.6rem;
+        padding: 0.4rem 0.6rem;
         border-radius: 5rem;
         border: 0.1rem solid #e6e6e6;
       }

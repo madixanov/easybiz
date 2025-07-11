@@ -144,12 +144,12 @@ onMounted(() => {
 
     .edit-icon {
       cursor: pointer;
-      color: #007bff;
+      color: #333;
       font-weight: bold;
       transition: color 0.2s;
 
       &:hover {
-        color: #0056b3;
+        color: #1d8d1d;
       }
     }
 

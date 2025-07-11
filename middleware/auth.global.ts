@@ -21,7 +21,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     
     const publicRoutes = ['login', 'sign-up', 'sign-up-otp'];
 
-    if (token) {
+    // if (token) {
+    if (!token) {
         if (publicRoutes.includes(baseRouteName)) {
             return { path: '/' };
         }

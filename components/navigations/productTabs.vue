@@ -1,5 +1,12 @@
 <template>
-  <div class="product-tabs" :style="{display: $router.currentRoute.value.path.includes('/generator') ? 'flex': 'none'}">
+  <div
+    class="product-tabs"
+    :style="{
+      display: $router.currentRoute.value.path.includes('/generator')
+        ? 'flex'
+        : 'none',
+    }"
+  >
     <div class="product-tabs-wrapper">
       <nuxt-link class="product-tabs-link" to="/generator">
         Статистика
@@ -11,16 +18,16 @@
     <button class="product-tabs-add" @click="toggle">+ Добавить продукт</button>
   </div>
 
-  <AddProductModal :class="{active: show}" @close="toggle"/>
+  <AddProductModal :class="{ active: show }" @close="toggle" />
 </template>
 
 <script lang="ts" setup>
-import AddProductModal from "~/components/ui/modals/addProduct.vue";
+import AddProductModal from "~/components/ui/modals/products/addProduct.vue";
 
 const show = ref(false);
 const toggle = () => {
   show.value = !show.value;
-}; 
+};
 </script>
 
 <style scoped lang="scss">
