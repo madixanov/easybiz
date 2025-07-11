@@ -1,4 +1,5 @@
 /api/*                   http://13.239.85.199/api/:splat                 200
+/api/statistics/*                   http://13.239.85.199/api/statistics/:splat      200
 
 /users/update-self/*     http://3.125.46.191/users/update-self/:splat   200
 /users/*                 http://3.125.46.191/users/:splat               200
