@@ -1,9 +1,12 @@
-/api/*     http://13.239.85.199/api/:splat     200
-/users/*   http://3.125.46.191/users/:splat   200
-/users/update-self/*   http://3.125.46.191/users/update-self/:splat   200
-/chats/*   http://3.125.46.191/chats/:splat   200
-/chats/uploads/*   http://3.125.46.191/chats/uploads/:splat   200
-/chats/favorites/*   http://3.125.46.191/chats/favorites/:splat   200
-/auth/*   http://3.125.46.191/auth/:splat   200
-/admins/*   http://3.125.46.191/admins/:splat   200
-/statistics/*   http://3.125.46.191/statistics/:splat   200
+/api/*                   http://13.239.85.199/api/:splat                 200
+
+/users/update-self/*     http://3.125.46.191/users/update-self/:splat   200
+/users/*                 http://3.125.46.191/users/:splat               200
+
+/chats/uploads/*         http://3.125.46.191/chats/uploads/:splat       200
+/chats/favorites/*       http://3.125.46.191/chats/favorites/:splat     200
+/chats/*                 http://3.125.46.191/chats/:splat               200
+
+/auth/*                  http://3.125.46.191/auth/:splat                200
+/admins/*                http://3.125.46.191/admins/:splat              200
+/statistics/*            http://3.125.46.191/statistics/:splat          200
