@@ -1,9 +1,9 @@
 <template>
   <div class="cards">
-    <div class="cards-card" v-for="(item, index) in sortedData" :key="item.id">
+    <div class="cards-card" v-for="(item, index) in sortedData as ProductDto" :key="item.id">
       <input type="checkbox" class="cards-card-checkbox" :value="item.id" :checked="selectedProducts.includes(item.id)" @change="toggleCheckbox(item.id)"/>
       <div class="cards-card-image">
-        <img :src="item.imageUrl" alt="Product Image" @click="showModal(item.metaTitle)"/>
+        <img :src="item.imageUrl" alt="Product Image" @click="showModal(item.imageUrl)"/>
       </div>
       <p class="cards-card-title">{{ item.metaTitle.slice(0, 22) }}</p>
       <span class="cards-card-price">${{ item.price }}</span>
@@ -12,26 +12,18 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import type { ProductDto } from "~/interface/products/product";
 import showModal from "~/composables/modals/showImage";
 
 const props = defineProps<{
-  rows: Array<{
-    id: string;
-    image: string;
-    producer: string;
-    products: string;
-    categories: string;
-    link: string;
-    price: number;
-  }>;
+  rows: Array<ProductDto>;
   selectedProducts: string[];
 }>();
 
 const emit = defineEmits(["update:selected-products"]);
 
 const sortedData = computed(() =>
-  props.rows.slice().sort((a, b) => a.id.localeCompare(b.id))
+  props.rows.slice().sort((a: any, b: any) => a.id.localeCompare(b.id))
 );
 
 const toggleCheckbox = (id: string) => {

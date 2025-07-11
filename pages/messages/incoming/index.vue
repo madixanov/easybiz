@@ -32,8 +32,10 @@ const fetchSavedChats = async () => {
   try {
     const response = await apiDataFetch("/chats/get-flows", options);
     const data: ChatItem[] = await response.json();
-    chats.value = data;
-    console.log(chats.value);
+    const incomingChat = data.filter(chat =>
+      chat.status === "OPEN" || chat.status === "ACTIVE"
+    );
+    chats.value = incomingChat;
   } catch (error) {
     console.error("Ошибка:", error);
   }

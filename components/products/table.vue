@@ -1,14 +1,16 @@
 <template>
   <div class="product-table">
-    <table>
+    <UiLoader :height="'100%'" :has-background="false" v-if="!loaded" />
+    <table
+      :style="{
+        opacity: loaded ? 1 : 0,
+        transition: 'all 500ms ease',
+      }"
+    >
       <thead>
         <tr>
           <th>
-            <input
-              type="checkbox"
-              :checked="allSelected"
-              @change="toggleAll"
-            />
+            <input type="checkbox" :checked="allSelected" @change="toggleAll" />
           </th>
           <th>Id</th>
           <th>Image</th>
@@ -39,7 +41,11 @@
           <td>{{ product.category.name }}</td>
           <td>{{ product.link }}</td>
           <td>${{ product.price }}</td>
-          <td><span class="edit-icon">✎</span></td>
+          <td>
+            <nuxt-link :to="`/generator/table/${product.id}`" class="edit-icon"
+              >✎</nuxt-link
+            >
+          </td>
         </tr>
       </tbody>
     </table>
@@ -47,48 +53,49 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import type { ProductDto } from "~/interface/products/product";
+import UiLoader from "~/components/ui/loader.vue";
 
+const loaded = ref(false);
 const props = defineProps<{
-  products: Array<{
-    id: string;
-    image: string;
-    producer: string;
-    products: string;
-    categories: string;
-    link: string;
-    price: number;
-  }>;
-  selectedProducts: string[];
+  products: Array<ProductDto>;
+  selectedProducts: any[];
 }>();
 
-const emit = defineEmits(['update:selected-products']);
+const emit = defineEmits(["update:selected-products"]);
 
 const allSelected = computed(() => {
-  return props.products.length > 0 && props.products.every(p => props.selectedProducts.includes(p.id));
+  return (
+    props.products.length > 0 &&
+    props.products.every((p: ProductDto) =>
+      props.selectedProducts.includes(p.id)
+    )
+  );
 });
 
 const toggleAll = () => {
-  const newSelection = allSelected.value ? [] : props.products.map(p => p.id);
-  emit('update:selected-products', newSelection);
+  const newSelection = allSelected.value ? [] : props.products.map((p) => p.id);
+  emit("update:selected-products", newSelection);
 };
 
-const toggleSingle = (id: string) => {
+const toggleSingle = (id: any) => {
   const newSelected = props.selectedProducts.includes(id)
-    ? props.selectedProducts.filter(pid => pid !== id)
+    ? props.selectedProducts.filter((pid) => pid !== id)
     : [...props.selectedProducts, id];
-  emit('update:selected-products', newSelected);
+  emit("update:selected-products", newSelected);
 };
+onMounted(() => {
+  setTimeout(() => {
+    loaded.value = true;
+  }, 1000);
+});
 </script>
-
 
 <style scoped lang="scss">
 .product-table {
   width: 100%;
-  // border-radius: .8rem;
-  // overflow: hidden;
+  position: relative;
   overflow-x: auto;
-  // border: 0.1rem solid #e5e5e5;
 
   table {
     font-size: 1.4rem;
@@ -103,23 +110,22 @@ const toggleSingle = (id: string) => {
       white-space: nowrap;
 
       @media (max-width: 600px) {
-        padding: .8rem 1rem;
+        padding: 0.8rem 1rem;
       }
     }
 
-    tr{
-        border-top: .1rem solid #e5e5e5;
-        border-bottom: .1rem solid #e5e5e5;
+    tr {
+      border-top: 0.1rem solid #e5e5e5;
+      border-bottom: 0.1rem solid #e5e5e5;
 
-        &:last-of-type{
-            border-bottom: unset;
-        }
+      &:last-of-type {
+        border-bottom: unset;
+      }
     }
-
 
     th {
       background-color: #fff;
-      border-bottom: .1rem solid #e5e5e5;
+      border-bottom: 0.1rem solid #e5e5e5;
       font-weight: 600;
       z-index: 1;
     }
@@ -127,7 +133,7 @@ const toggleSingle = (id: string) => {
     .product-image {
       width: 6rem;
       height: 4.4rem;
-      border-radius: .4rem;
+      border-radius: 0.4rem;
       object-fit: cover;
 
       @media (max-width: 600px) {
@@ -153,21 +159,21 @@ const toggleSingle = (id: string) => {
 
     input[type="checkbox"]:checked {
       background-color: #28a745;
-      border-color: #28a745; 
+      border-color: #28a745;
     }
 
     input[type="checkbox"] {
-      appearance: none; 
+      appearance: none;
       width: 1.5rem;
       height: 1.5rem;
-      border: .2rem solid #ddd;
-      border-radius: 3px; 
+      border: 0.2rem solid #ddd;
+      border-radius: 3px;
       cursor: pointer;
       position: relative;
     }
 
     input[type="checkbox"]:checked::after {
-      content: "✔"; 
+      content: "✔";
       color: #fff;
       position: absolute;
       top: 50%;

@@ -83,20 +83,23 @@ onMounted(async () => {});
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 1rem;
 
   & input,
   textarea {
     color: #000 !important;
     background: #fff;
   }
+
   &-title {
     font-size: 1.2rem;
+    line-height: 120%;
     color: #cccccc;
+    margin-bottom: .4rem;
   }
 
   &-item {
-    max-width: calc(100% / 2 - 0.2rem);
+    max-width: calc(100% / 2 - 0.5rem);
     width: 100%;
     display: flex;
     flex-direction: column;

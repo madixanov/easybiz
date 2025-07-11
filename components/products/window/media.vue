@@ -1,7 +1,7 @@
 <template>
   <div class="product-media">
     <label class="product-media-upload" for="media-content">
-      <i class="fas fa-solid fa-upload"></i>
+      <span v-html="upload"></span>
       <p class="product-layout-title">Загрузить картинку</p>
       <input
         type="file"
@@ -27,6 +27,7 @@
 </template>
 
 <script lang="ts" setup>
+import upload from "~/assets/icons/upload.svg?raw";
 import showModal from "~/composables/modals/showImage";
 // const props = defineProps({
 //   media: {
@@ -57,11 +58,10 @@ const emit = defineEmits(["upload"]);
         row-gap: 1rem;
         cursor: pointer;
 
-        & i {
-          font-size: 1rem;
+        & span {
           background: #229c39;
           color: white;
-          padding: 0.8rem;
+          padding: 1rem;
           border-radius: 50%;
         }
 

@@ -1,9 +1,34 @@
 <script lang="ts" setup>
 import ProductMain from "~/components/products/window/main.vue";
 import ProductMedia from "~/components/products/window/media.vue";
+import Products from "~/composables/modals/products";
 const emits = defineEmits(["close"]);
 const activeIndex = ref(0);
-const isFilled = ref(false)
+const isFilled = ref(false);
+const productParams = ref({
+  model: "",
+  priority: 0,
+  link: "",
+  metaTitle: "",
+  metaTags: "",
+  metaDescription: "",
+  price: 0,
+  extra: 0,
+  profit: 0,
+  warehouse: "",
+  amount: 0,
+  availability: true,
+  description: "",
+  imageUrl: "",
+  views: 0,
+  productManufacturerId: "0197f3f3-f7e8-7ac0-938f-94490f52c368",
+  sectionId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  categoryId: "",
+  countryId: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+})
+const createProduct = async () => {
+  await new Products().create(productParams.value);
+};
 </script>
 
 <template>
@@ -11,7 +36,6 @@ const isFilled = ref(false)
     <div class="modal-container">
       <div class="modal-header">
         <h2 class="modal-header-title">Добавить продукт</h2>
-        <!-- <button class="modal-close" @click="$emit('close')">&times;</button> -->
         <div class="modal-header-buttons">
           <button
             v-for="(el, i) in ['Главная', 'Медиа']"
@@ -22,7 +46,9 @@ const isFilled = ref(false)
             {{ el }}
           </button>
         </div>
-        <button class="modal-header-add" :disabled="!isFilled" @click="">Добавить</button>
+        <button class="modal-header-add" :disabled="!isFilled" :style="{opacity: !isFilled ? '0.8' : '1'}" @click="createProduct">
+          Добавить
+        </button>
       </div>
       <ProductMain :style="{ display: activeIndex === 0 ? 'flex' : 'none' }" />
       <ProductMedia :style="{ display: activeIndex === 1 ? 'flex' : 'none' }" />
