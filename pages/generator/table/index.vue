@@ -35,16 +35,20 @@
       :products="prod"
       :selected-products="selectedProducts"
       @update:selected-products="selectedProducts = $event"
-      :style="{ display: isCarded ? 'none' : 'block' }"
+      :style="{ display: isCarded || prod.length !==0 ? 'none' : 'block' }"
     />
 
     <CardedView
       :rows="prod"
       :selected-products="selectedProducts"
       @update:selected-products="selectedProducts = $event"
-      :style="{ display: isCarded ? 'flex' : 'none' }"
+      :style="{ display: isCarded || prod.length !==0 ? 'flex' : 'none' }"
     />
+
+    <div class="products-nodata"  :style="{ display: loaded && prod.length === 0 ? 'flex' : 'none' }"><h2>Продукта ещё не добавлены!</h2></div>
+
   </div>
+
   <ProductsFilter
     :class="{ active: show }"
     @close="toggle"
@@ -77,6 +81,7 @@ const filter = ref({
   minPrice: 10,
   maxPrice: 1000,
 });
+const loaded = ref(false)
 
 const isCarded = ref(false);
 
@@ -109,7 +114,7 @@ const getProducts = async () => {
 
 const selectedProducts = ref<string[]>([]);
 const deleteProduct = async () => {
-  const res = await new Products().delete(selectedProducts.value[0]);
+  const res = await new Products().delete(selectedProducts.value);
   if (res.ok) {
     selectedProducts.value = [];
     SuccessNotification("Продукт успешно удален");
@@ -120,6 +125,9 @@ const deleteProduct = async () => {
 
 onMounted(() => {
   getProducts();
+  setTimeout(() => {
+    loaded.value = true;
+  }, 1000);
 });
 </script>
 
@@ -166,6 +174,20 @@ onMounted(() => {
           background-color: #f0f0f0;
         }
       }
+    }
+  }
+
+  &-nodata{
+    height: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & h2{
+      font-size: 4rem;
+      font-weight: 600;
+      line-height: 120%;
+      color: #333;
     }
   }
 

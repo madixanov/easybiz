@@ -62,14 +62,15 @@ export class Products {
         return response;
     }
 
-    public async delete(id: string | string[]) {
+    public async delete(ids: string[]) {
         const options = {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
             },
+            body: JSON.stringify({ productIds:  ids})
         };
-        const res = await apiProductsFetch(`/api/products/${id}`, options)
+        const res = await apiProductsFetch(`/api/products/batch`, options)
         return res
     }
 
