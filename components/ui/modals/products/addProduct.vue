@@ -2,34 +2,61 @@
 import ProductMain from "~/components/products/window/main.vue";
 import ProductMedia from "~/components/products/window/media.vue";
 import Products from "~/composables/modals/products";
+import { FailedAlert, PushNotification } from "~/composables/Notification/list";
 const emits = defineEmits(["close"]);
 const activeIndex = ref(0);
 const isFilled = ref(false);
 
 const productParams = ref({
   model: "",
-  priority: 0,
+  identificationNumber: "c000",
   link: "",
   metaTitle: "",
   metaTags: "",
   metaDescription: "",
-  price: 0,
-  extra: 0,
   profit: 0,
-  warehouse: "",
+  price: 0,
+  priority: 1,
+  extra: 0,
+  warehouse: "", 
   amount: 0,
   availability: true,
   description: "",
-  imageUrl: "",
-  views: 0,
   productManufacturerId: "0197f3f3-f7e8-7ac0-938f-94490f52c368",
-  sectionId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  categoryId: "",
-  countryId: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  sectionId: "0197f3f3-f805-7dcb-bccb-579e6d800663",
+  categoryId: "0197f3f3-f81d-79b4-ae87-5903bbf0dfc8",
+  countryId: "0197f3f3-f7e4-72b5-af45-b513181fde89",
+  imageUrl: "",
 })
-const createProduct = async () => {
-  await new Products().create(productParams.value);
+
+const checkIsFilled = () => {
+  isFilled.value = Object.entries(productParams.value).every(([key, val]) => {
+    if (["profit", "price", "priority", "extra", "amount", "availability"].includes(key)) return true;
+    return typeof val === "string" ? val.trim() !== "" : val != null;
+  });
 };
+
+const createProduct = async () => {
+  const res = await new Products().create(productParams.value);
+  if(res.ok){
+    PushNotification('Продукт успешно добавлен');
+    emits('close');
+  }else{
+    FailedAlert('Ошибка при добавлении продукта');
+  }
+};
+
+const imageUpload = async (file: File) => {
+  const url = await new Products().uploadImage(file);
+  isFilled.value = true;
+  productParams.value.imageUrl = url;
+};
+
+watch(
+  () => productParams.value,
+  () => checkIsFilled(),
+  { deep: true, immediate: true }
+);
 </script>
 
 <template>
@@ -47,12 +74,12 @@ const createProduct = async () => {
             {{ el }}
           </button>
         </div>
-        <button class="modal-header-add" :disabled="!isFilled" :style="{opacity: !isFilled ? '0.8' : '1'}" @click="createProduct">
+        <button class="modal-header-add" @click="createProduct" :disabled="!isFilled" :class="{active: isFilled }">
           Добавить
         </button>
       </div>
-      <ProductMain :style="{ display: activeIndex === 0 ? 'flex' : 'none' }" />
-      <ProductMedia :style="{ display: activeIndex === 1 ? 'flex' : 'none' }" />
+      <ProductMain :style="{ display: activeIndex === 0 ? 'flex' : 'none' }" :prod-data="productParams" />
+      <ProductMedia :style="{ display: activeIndex === 1 ? 'flex' : 'none' }" :media="productParams.imageUrl" @upload="imageUpload"/>
     </div>
   </div>
 </template>
@@ -75,10 +102,10 @@ const createProduct = async () => {
   z-index: 0;
 
   &-container {
+    max-width: 90%;
+    max-height: 95%;
     width: 100%;
     height: 100%;
-    max-width: 120rem;
-    max-height: 60rem;
     overflow-y: auto;
     padding: 2rem 2.5rem;
     border-radius: 1rem;
@@ -131,15 +158,19 @@ const createProduct = async () => {
       color: #fff;
       line-height: 120%;
       padding: 0.8rem 1.2rem;
-      background: #229c39;
+      background: #229c38d3;
       border-radius: 0.8rem;
+
+      &.active{
+        background: #229c39;
+      }
     }
   }
 
   &.active {
     opacity: 1;
     visibility: visible;
-    z-index: 2000;
+    z-index: 1000;
 
     & .modal-container {
       transform: scale(1);

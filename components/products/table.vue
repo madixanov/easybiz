@@ -37,9 +37,9 @@
             <img :src="product.imageUrl" alt="Product" class="product-image" />
           </td>
           <td>{{ product.productManufacturer.name }}</td>
-          <td>{{ product.metaTitle }}</td>
+          <td>{{ product.model }}</td>
           <td>{{ product.category.name }}</td>
-          <td>{{ product.link }}</td>
+          <td><a :href="product.link" target="_blank" rel="noopener noreferrer">{{ product.link }}</a></td>
           <td>${{ product.price }}</td>
           <td>
             <nuxt-link :to="`/generator/table/${product.id}`" class="edit-icon"

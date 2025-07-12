@@ -3,26 +3,28 @@
     <header class="dash-widget-header">
       <p class="dash-widget-header-title">{{ title }}</p>
     </header>
-    <section class="dash-widget-content">
+    <section class="dash-widget-content" v-if="!prod.error">
       <div class="dash-widget-media">
-        <img :src="prod.imageUrl.replace('https://via.placeholder.com','https://placehold.co')" alt="Product Image" v-if="prod.imageUrl && prod.imageUrl.length > 0" />
-        <img :src="'https://placehold.co/300x300?text=No+Data'" alt="Unavailable" v-else />
+        <img :src="(prod.imageUrl ?? 'https://placehold.co/300x300?text=No+Image').replace('https://via.placeholder.com','https://placehold.co')" alt="Product Image" />
       </div>
       <div class="dash-widget-data">
         <p class="dash-widget-data-item title">
-          <i :class="`fas fa-solid ${icon}`" v-if="prod.profit"></i> {{ prod.profit }}
+          <i :class="`fas fa-solid ${icon}`" v-if="prod?.profit"></i> {{ prod?.profit }}
         </p>
-        <p class="dash-widget-data-item" v-if="prod.priority">{{prod.priority.toFixed(1)}}%</p>
+        <p class="dash-widget-data-item" v-if="prod?.priority">{{prod?.priority.toFixed(1)}}%</p>
       </div>
+    </section>
+    <section class="dash-widget-nodata"v-else>
+      <h2>{{ title }} не определен</h2>
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
-const complete = ref(false);
+import type { ProductDto } from '~/interface/products/product';
 const props = defineProps({
   prod: {
-    type: Object as PropType<any>,
+    type: Object as PropType<ProductDto>,
     required: true,
   },
   title: {
@@ -33,10 +35,6 @@ const props = defineProps({
     type: String,
     required: true,
   }
-})
-
-onMounted(() => {
-  complete.value = true;
 })
 </script>
 
@@ -82,6 +80,19 @@ onMounted(() => {
       align-items: center;
       justify-content: space-between;
       padding: 1.5rem;
+    }
+
+    &-nodata{
+      width: 100%;
+      height: 15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 3rem;
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 140%;
     }
 
     &-media {

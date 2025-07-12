@@ -25,10 +25,11 @@
 </template>
 
 <script lang="ts" setup>
+import type { Category } from '~/interface/products/product';
 
 const props = defineProps({
   cat: {
-    type: Array as PropType<any>,
+    type: Array as PropType<Category[]>,
     required: true,
   },
   title: {
@@ -40,8 +41,6 @@ const props = defineProps({
     default: 25,
   },
 });
-console.log(props.cat, 'cat');
-
 </script>
 
 <style lang="scss" scoped>

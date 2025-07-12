@@ -18,8 +18,8 @@
 
 <script lang="ts" setup>
 interface StatItem {
-  products: string;
-  sold: string;
+  products: number;
+  sold: number;
 }
 
 const props = defineProps({

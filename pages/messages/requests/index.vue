@@ -119,7 +119,6 @@ const archiveChat = async () => {
   try {
     const res = await apiDataFetch(`/chats/chat-session-archive/${requests.value[id.value - 1].id}`, options);
     if (!res.ok) {
-      console.log("Error: " + res.status);
       return;
     }
     PushNotification("Обращение успешно архивировано!");

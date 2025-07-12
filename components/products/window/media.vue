@@ -7,7 +7,7 @@
         type="file"
         hidden
         id="media-content"
-        @input="$emit('upload', $event)"
+        @change="onFileChange"
       />
     </label>
     <div class="product-media-cards">
@@ -21,7 +21,10 @@
         ></i>
         <img :src="item.url" alt="image" @click="showModal(item.url)" />
       </div> -->
-      <div class="product-media-card-status">Вы ещё не загрузили фотографии</div>
+      <div v-if="media" class="product-media-card">
+        <img :src="media" alt="Uploaded Image"  @click="showModal(media)"/>
+      </div>
+      <div class="product-media-card-status" v-else>Вы ещё не загрузили фотографии</div>
     </div>
   </div>
 </template>
@@ -29,14 +32,30 @@
 <script lang="ts" setup>
 import upload from "~/assets/icons/upload.svg?raw";
 import showModal from "~/composables/modals/showImage";
-// const props = defineProps({
-//   media: {
-//     type: Array<any>,
-//     required: true,
-//   },
-// });
+const props = defineProps({
+  media: {
+    type: String,
+    required: true,
+  },
+});
 
 const emit = defineEmits(["upload"]);
+
+const media = ref<string | null>(null);
+
+const onFileChange = async (event: Event) => {
+  const fileInput = event.target as HTMLInputElement;
+  const file = fileInput?.files?.[0];
+  if (file) {
+    try {
+      const imageUrl = URL.createObjectURL(file);
+      media.value = imageUrl;
+      emit("upload", file);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -79,14 +98,16 @@ const emit = defineEmits(["upload"]);
 
     &-card {
       position: relative;
-      max-width: calc(100% / 3 - 0.4rem);
+      // max-width: calc(100% / 3 - 0.4rem);
       width: 100%;
-      height: 20rem;
+      height: 30rem;
+      border: .1rem solid #e0e0e0;
       border-radius: 0.6rem;
       overflow: hidden;
-      @media (max-width: 480px) {
-        max-width: calc(100% / 2 - 0.3rem);
-      }
+      cursor: pointer;
+      // @media (max-width: 480px) {
+      //   max-width: calc(100% / 2 - 0.3rem);
+      // }
 
       & i {
         position: absolute;

@@ -52,25 +52,46 @@ export class Products {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(product)
+            body: JSON.stringify({ productCreateUpdateDto: product})
         };
 
         const response = await apiProductsFetch(`/api/products`, options);
         const data = await response.json();
         console.log(data, 'created');
 
-        return data;
+        return response;
     }
 
-        public async delete(id: string | string[]) {
-            const options = {
-                method: 'DELETE',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            };
-            const res = await apiProductsFetch(`/api/products/${id}`, options)
-            return res
+    public async delete(id: string | string[]) {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+        const res = await apiProductsFetch(`/api/products/${id}`, options)
+        return res
+    }
+
+    public async uploadImage(file: File): Promise<string> {
+        const formData = new FormData();
+        formData.append("file", file);
+      
+        const options = {
+          method: "POST",
+          body: formData,
+        };
+      
+        const response = await apiProductsFetch(`/api/products/upload-preview`, options);
+        
+        if (!response.ok) {
+            console.log("Image upload failed");
+            return '';
         }
+      
+        const data = await response.json();
+        return data.url;
+      }
+      
 }
 export default Products;

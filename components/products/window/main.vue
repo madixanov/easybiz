@@ -1,49 +1,169 @@
 <template>
   <div class="products-layout">
     <label class="products-layout-item">
-      <p class="products-layout-title">Название продукта</p>
+      <p class="products-layout-title">Произодитель</p>
       <input
         type="text"
-        v-model="productData.title"
-        placeholder="Введите название"
+        placeholder="Введите произодителя"
       />
     </label>
     <label class="products-layout-item">
-      <p class="products-layout-title">Цена продукта</p>
+      <p class="products-layout-title">Модель</p>
       <input
         type="text"
-        v-model="productData.price"
-        @input="formatPrice($event)"
-        placeholder="Введите цену"
+        v-model="prodData.model"
+        placeholder="Введите модель"
       />
     </label>
     <label class="products-layout-item">
-      <p class="products-layout-title">Количество продукта</p>
+      <p class="products-layout-title">Номер продукта</p>
       <input
         type="text"
-        v-model="productData.amount"
-        placeholder="Введите количество"
+        v-model="prodData.identificationNumber"
+        placeholder="Введите номер"
+      />
+    </label>
+    <label class="products-layout-item">
+      <p class="products-layout-title">Первенство</p>
+      <input
+        type="text"
+        v-model="prodData.priority"
+        placeholder="Введите первенство"
       />
     </label>
     <div class="products-layout-item">
-      <!-- <label for="categories"
+      <label for="categories"
         ><p class="products-layout-title">Выберите категорию:</p></label
       >
-      <select id="categories" name="categories" v-model="productData.category">
+      <select id="categories" name="categories" v-model="prodData.categoryId">
         <option
           v-for="(category, i) in categories"
           :key="i"
           :value="category.id"
         >
-          {{ category.category_name }}
+          {{ category.name }}
         </option>
-      </select> -->
+      </select>
+    </div>
+    <div class="products-layout-item">
+      <label for="sections"
+        ><p class="products-layout-title">Выберите секцию:</p></label
+      >
+      <select id="sections" name="sections" v-model="prodData.sectionId">
+        <option
+          v-for="(section, i) in sections"
+          :key="i"
+          :value="section.id"
+        >
+          {{ section.name }}
+        </option>
+      </select>
+    </div>
+    <label class="products-layout-item">
+      <p class="products-layout-title">Ссылка</p>
+      <input
+        type="text"
+        v-model="prodData.link"
+        placeholder="https://example.com/"
+      />
+    </label>
+    <label class="products-layout-item">
+      <p class="products-layout-title">Мета название</p>
+      <input
+        type="text"
+        v-model="prodData.metaTitle"
+        placeholder="Введите мета название"
+      />
+    </label>
+    <label class="products-layout-item box50">
+      <p class="products-layout-title">Мета тег</p>
+      <input
+        type="text"
+        v-model="prodData.metaTags"
+        placeholder="Введите мета тег"
+      />
+    </label>
+    <label class="products-layout-item box50">
+      <p class="products-layout-title">Мета описание</p>
+      <input
+        type="text"
+        v-model="prodData.metaDescription"
+        placeholder="Введите мета описание"
+      />
+    </label>
+    <label class="products-layout-item box30">
+      <p class="products-layout-title">Цена</p>
+      <input
+        type="text"
+        v-model="prodData.price"
+        placeholder="Укажите цену"
+      />
+    </label>
+    <label class="products-layout-item box30">
+      <p class="products-layout-title">Наценка</p>
+      <input
+        type="text"
+        v-model="prodData.extra"
+        placeholder="Укажите наценку"
+      />
+    </label>
+    <label class="products-layout-item box30">
+      <p class="products-layout-title">Прибыль</p>
+      <input
+        type="text"
+        v-model="prodData.profit"
+        placeholder="Укажите прибыль"
+      />
+    </label>
+    <div class="products-layout-item">
+      <label for="countries"
+        ><p class="products-layout-title">Выберите страну:</p></label
+      >
+      <select id="countries" name="countries" v-model="prodData.countryId">
+        <option
+          v-for="(country, i) in countries"
+          :key="i"
+          :value="country.id"
+        >
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
+    <label class="products-layout-item">
+      <p class="products-layout-title">Склад</p>
+      <input
+        type="text"
+        v-model="prodData.warehouse"
+        placeholder="Место хранения"
+      />
+    </label>
+    <label class="products-layout-item">
+      <p class="products-layout-title">Количество</p>
+      <input
+        type="text"
+        v-model="prodData.amount"
+        placeholder="Укажите количество"
+      />
+    </label>
+    <div class="products-layout-item">
+      <label for="availabilities"
+        ><p class="products-layout-title">Наличие товара:</p></label
+      >
+      <select id="availabilities" name="availabilities" v-model="prodData.availability">
+        <option
+          v-for="(available, i) in availabilities"
+          :key="i"
+          :value="available.id"
+        >
+          {{ available.name }}
+        </option>
+      </select>
     </div>
     <label class="products-layout-item textarea">
       <p class="products-layout-title">Описание продукта</p>
       <textarea
         class="products-layout-desc"
-        v-model="productData.description"
+        v-model="prodData.description"
         placeholder="Введите описание"
       ></textarea>
     </label>
@@ -52,30 +172,38 @@
 
 <script lang="ts" setup>
 const props = defineProps({
-  productData: {
-    type: Object,
-    required: false,
-    default: () => ({
-      title: "",
-      price: "",
-      amount: "",
-      description: "",
-      media: [],
-      category: "",
-    }),
+  prodData: {
+    type: Object as PropType<any>,
+    required: true,
   },
 });
 
-const formatPrice = (event: Event) => {
-  let input = (event.target as HTMLInputElement).value;
-  input = input.replace(/[^0-9.]/g, "");
-  const parts = input.split(".");
-  if (parts.length > 2) input = parts[0] + "." + parts.slice(1).join("");
-  if (input && !input.startsWith("$")) input = `$${input}`;
-  props.productData.price = input;
-};
-
-onMounted(async () => {});
+const categories = ref<any[]>([]);
+const sections = ref<any>([]);
+const countries = ref<any>([]);
+const availabilities = ref([
+  { id: true, name: 'Имеется' },
+  { id: false, name: 'Нету' },
+]);
+const getData = async ()=>{
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const [categoryRes, sectionsRes, countriesRes] = await Promise.all([
+    apiProductsFetch('/api/categories', options).then(res => res.json()),
+    apiProductsFetch('/api/sections', options).then(res => res.json()),
+    apiProductsFetch('/api/countries', options).then(res => res.json()),
+  ]);
+  categoryRes.map((el: any)=> categories.value.push(el))
+  sectionsRes.map((el: any)=> sections.value.push(el))
+  countriesRes.map((el: any)=> countries.value.push(el))
+}
+onMounted(async () => {
+  getData()
+});
 </script>
 
 <style lang="scss" scoped>
@@ -99,22 +227,40 @@ onMounted(async () => {});
   }
 
   &-item {
-    max-width: calc(100% / 2 - 0.5rem);
+    max-width: calc(100% / 4 - 0.8rem);
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    & #categories {
-      border: 0.1rem solid #eeeeee;
-      outline: none;
-      font-size: 1.2rem;
-      line-height: 120%;
-      padding: 0.525rem 0.5rem;
-      border-radius: 0.5rem;
-      color: #8f8f8f;
+    & select {
+      background-color: white;
+      font-size: 1.4rem !important;
+      color: black;
+      padding: 0.725rem 1.2rem;
+      border-radius: .5rem;
+      border: .1rem solid #eeeeee;
+      appearance: none;
+      cursor: pointer;
+
+      & option{
+        font-size: 1.4rem;
+
+        &:hover{
+          background-color: #229C22;
+          color: white;
+        }
+      }
     }
+
+    &.box50{
+      max-width: calc(100% / 2 - 0.6rem);
+    }
+    &.box30{
+      max-width: calc(100% / 3 - 0.7rem);
+    }
+
     &.textarea {
       max-width: 100%;
     }
