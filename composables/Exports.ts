@@ -4,7 +4,6 @@ export const PRODUCTS_URL = 'http://13.239.85.199'
 export const CONSTRUCTOR_URL = 'http://3.67.84.116'
 
 export const uri = `${USER_FETCH_HOST}`
-
 // middleware and otp.vue 
 
 export function apiDataFetch(url: string, options: RequestInit) {

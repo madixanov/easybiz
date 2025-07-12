@@ -1,12 +1,19 @@
 <template>
   <div class="products-layout">
-    <label class="products-layout-item">
-      <p class="products-layout-title">Произодитель</p>
-      <input
-        type="text"
-        placeholder="Введите произодителя"
-      />
-    </label>
+    <div class="products-layout-item">
+      <label for="manufacturer"
+        ><p class="products-layout-title">Производитель:</p></label
+      >
+      <select id="manufacturer" name="manufacturer" v-model="prodData.productManufacturerId">
+        <option
+          v-for="(manufacturer, i) in manufacturers"
+          :key="i"
+          :value="manufacturer.id"
+        >
+          {{ manufacturer.name }}
+        </option>
+      </select>
+    </div>
     <label class="products-layout-item">
       <p class="products-layout-title">Модель</p>
       <input
@@ -178,6 +185,7 @@ const props = defineProps({
   },
 });
 
+const manufacturers = ref<any[]>([])
 const categories = ref<any[]>([]);
 const sections = ref<any>([]);
 const countries = ref<any>([]);
@@ -192,14 +200,16 @@ const getData = async ()=>{
       'Content-Type': 'application/json',
     },
   };
-  const [categoryRes, sectionsRes, countriesRes] = await Promise.all([
+  const [categoryRes, sectionsRes, countriesRes, manufacturersRes] = await Promise.all([
     apiProductsFetch('/api/categories', options).then(res => res.json()),
     apiProductsFetch('/api/sections', options).then(res => res.json()),
     apiProductsFetch('/api/countries', options).then(res => res.json()),
+    apiProductsFetch('/api/productmanufacturers', options).then(res => res.json()),
   ]);
   categoryRes.map((el: any)=> categories.value.push(el))
   sectionsRes.map((el: any)=> sections.value.push(el))
   countriesRes.map((el: any)=> countries.value.push(el))
+  manufacturersRes.map((el: any)=> manufacturers.value.push(el))
 }
 onMounted(async () => {
   getData()

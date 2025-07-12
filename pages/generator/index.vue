@@ -33,7 +33,7 @@ const getStatistics = async (): Promise<void> => {
       apiProductsFetch(`/api/statistics/sales-this-month`, options).then(res => res.json()) as Promise<number>,
       apiProductsFetch(`/api/statistics/best-seller`, options).then(res => res.json()) as Promise<ProductDto>,
       apiProductsFetch(`/api/statistics/most-viewed`, options).then(res => res.json()) as Promise<ProductDto>,
-        apiProductsFetch(`/api/statistics/top-selling-products`, options).then(res => res.json()) as Promise<ProductDto[]>,
+      apiProductsFetch(`/api/statistics/top-selling-products`, options).then(res => res.json()) as Promise<ProductDto[]>,
       apiProductsFetch(`/api/statistics/top-viewed-products`, options).then(res => res.json()) as Promise<ProductDto[]>,
       apiProductsFetch(`/api/statistics/top-sections`, options).then(res => res.json()) as Promise<Category[]>,
       apiProductsFetch(`/api/statistics/top-categories`, options).then(res => res.json()) as Promise<Category[]>

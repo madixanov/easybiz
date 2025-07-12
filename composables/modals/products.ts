@@ -92,6 +92,5 @@ export class Products {
         const data = await response.json();
         return data.url;
       }
-      
 }
 export default Products;
