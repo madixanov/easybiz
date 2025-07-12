@@ -30,9 +30,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         if (baseRouteName === 'sign-up-otp' && !email) {
             return { path: '/sign-up' };
         }
-        if (publicRoutes.includes(baseRouteName)) {
-            return;
-        }
+        if (publicRoutes.includes(baseRouteName)) return;
         return { path: '/login' };
     }
 });

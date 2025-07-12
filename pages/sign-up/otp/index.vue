@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div class="otp">
     <div class="otp-box">
       <div class="otp-modal" :style="{display: sended ? 'flex' : 'none'}">
@@ -271,9 +271,4 @@ const verifyOtp = async () => {
     margin: 1rem 0;
   }
 }
-</style> -->
-<template lang="html">
-  <div>
-    
-  </div>
-</template>
+</style>
