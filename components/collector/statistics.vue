@@ -79,7 +79,7 @@
       />
       <ProductsList
         :prod="stats.products"
-        :title="'просматриваемые продукты'"
+        :title="'продаваемые продукты'"
         :height="35"
         :style="{
           height: loaded ? 'auto' : '0',
