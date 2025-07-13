@@ -35,17 +35,17 @@
       :products="prod"
       :selected-products="selectedProducts"
       @update:selected-products="selectedProducts = $event"
-      :style="{ display: isCarded || prod.length !==0 ? 'none' : 'block' }"
+      :style="{ display: !isCarded && prod.length !==0 ? 'block' : 'none' }"
     />
 
     <CardedView
       :rows="prod"
       :selected-products="selectedProducts"
       @update:selected-products="selectedProducts = $event"
-      :style="{ display: isCarded || prod.length !==0 ? 'flex' : 'none' }"
+      :style="{ display: isCarded && prod.length !==0 ? 'flex' : 'none' }"
     />
 
-    <div class="products-nodata"  :style="{ display: loaded && prod.length === 0 ? 'flex' : 'none' }"><h2>Продукта ещё не добавлены!</h2></div>
+    <div class="products-nodata"  :style="{ display: loaded && prod.length === 0 ? 'flex' : 'none' }"><h2>Продукты ещё не добавлены!</h2></div>
 
   </div>
 
@@ -182,6 +182,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-top: .1rem solid #e5e5e5;
 
     & h2{
       font-size: 4rem;
