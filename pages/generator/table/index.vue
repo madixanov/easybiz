@@ -3,7 +3,7 @@
     <div class="products-controller">
       <p class="products-controller-title">Продукты</p>
       <div class="products-filter">
-        <button class="products-filter-button" @click="toggle">Filter</button>
+        <button class="products-filter-button" :disabled="prod.length < 1" @click="toggle">Filter</button>
         <!-- <button class="products-filter-button">Search</button> -->
         <button
           class="products-filter-button"
