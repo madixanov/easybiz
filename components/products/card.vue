@@ -5,7 +5,7 @@
       <div class="cards-card-image">
         <img :src="item.imageUrl" alt="Product Image" @click="showModal(item.imageUrl)"/>
       </div>
-      <p class="cards-card-title">{{ item.metaTitle.slice(0, 22) }}</p>
+      <p class="cards-card-title">{{ item.model.slice(0, 22) }}</p>
       <span class="cards-card-price">${{ item.price }}</span>
     </div>
   </div>
@@ -69,7 +69,8 @@ const toggleCheckbox = (id: string) => {
 
     &-image {
       width: 100%;
-      height: 10rem;
+      height: 13.5rem;
+      margin-top: 1rem;
       border-radius: 0.6rem;
       overflow: hidden;
 
