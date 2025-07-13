@@ -8,10 +8,11 @@
         <img :src="(prod.imageUrl ?? 'https://placehold.co/300x300?text=No+Image').replace('https://via.placeholder.com','https://placehold.co')" alt="Product Image" />
       </div>
       <div class="dash-widget-data">
-        <p class="dash-widget-data-item title">
-          <i :class="`fas fa-solid ${icon}`" v-if="prod?.profit"></i> {{ prod?.profit }}
-        </p>
-        <p class="dash-widget-data-item" v-if="prod?.priority">{{prod?.priority.toFixed(1)}}%</p>
+        <span class="dash-widget-data-icon" v-html="icon" v-if="icon"></span>
+        <div class="dash-widget-data-item title">
+          <p>{{ type }}</p>
+          <p class="dash-widget-data-item" v-if="prod?.priority">{{prod?.priority.toFixed(1)}}%</p>
+        </div>
       </div>
     </section>
     <section class="dash-widget-nodata"v-else>
@@ -22,6 +23,7 @@
 
 <script lang="ts" setup>
 import type { ProductDto } from '~/interface/products/product';
+import eye from '~/assets/icons/eye.svg?raw';
 const props = defineProps({
   prod: {
     type: Object as PropType<ProductDto>,
@@ -31,9 +33,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  icon: {
+  type: {
     type: String,
     required: true,
+  },
+  icon:{
+    type: String,
+    required: false,
   }
 })
 </script>
@@ -112,24 +118,22 @@ const props = defineProps({
       max-width: 50%;
       width: 100%;
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+
+      &-icon{
+        display: flex;
+        justify-content: center;
+      }
 
       &-item {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 400;
         line-height: 135%;
+        text-align: center;
 
         &.title {
           font-size: 1.8rem;
           font-weight: 600;
-          margin-bottom: 2rem;
-
-          & i {
-            margin-right: 0.5rem;
-          }
+          margin-bottom: 1rem;  
         }
       }
     }

@@ -11,7 +11,7 @@
         <BestProduct
           :prod="stats.best_product"
           :title="'Самый продаваемый продукт'"
-          :icon="'fa-dollar-sign'"
+          :type="stats.best_product?.price?.toString() ?? ''"
           :style="{
             height: loaded ? '100%' : '0',
             opacity: loaded ? 1 : 0,
@@ -28,7 +28,8 @@
         <BestProduct
           :prod="stats.most_viewed"
           :title="'Наиболле популярный продукт'"
-          :icon="'fa-eye'"
+          :icon="eye"
+          :type="stats.most_viewed.views?.toString() ?? ''"
           :style="{
             height: loaded ? '100%' : '0',
             opacity: loaded ? 1 : 0,
@@ -133,7 +134,7 @@ import ProductsList from "~/components/statistics/products.vue";
 import BestProduct from "~/components/statistics/product.vue";
 import Analytics from "~/components/statistics/analysis.vue";
 import type { StatisticsDto } from "~/interface/products/product";
-
+import eye from "~/assets/icons/eye.svg?raw";
 const loaded = ref(false);
 
 const props = defineProps<{

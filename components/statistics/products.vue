@@ -3,7 +3,7 @@
     <header class="dash-widget-header">
       <p class="dash-widget-header-title">Наиболее {{ title }}</p>
     </header>
-    <section class="dash-widget-list" :style="{ 'max-height': `${height}rem`, height: '100%' }">
+    <section class="dash-widget-list" :style="{ 'max-height': `${height}rem`, height: '100%', display: prod.length > 0 ? 'block' : 'none' }">
       <ul class="dash-widget-ul">
         <li
           class="dash-widget-item"
@@ -21,6 +21,9 @@
         </li>
       </ul>
     </section>
+    <div class="dash-widget-nodata" :style="{display: prod.length > 0 ? 'none' : 'block'}">
+      <p>{{ title }} не найдены</p>
+    </div>
   </div>
 </template>
 
@@ -61,9 +64,21 @@ const props = defineProps({
         color: black;
       }
     }
+
+    &-nodata{
+      width: 100%;
+      height: 15rem;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+    }
+
     &-list {
       overflow-y: auto;
     }
+
     &-ul {
       width: 100%;
     }

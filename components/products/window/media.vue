@@ -24,7 +24,7 @@
       <div v-if="media" class="product-media-card">
         <img :src="media" alt="Uploaded Image"  @click="showModal(media)"/>
       </div>
-      <div class="product-media-card-status" v-else>Вы ещё не загрузили фотографии</div>
+      <div class="product-media-card-status" v-else>Вы ещё не загрузили фотографию</div>
     </div>
   </div>
 </template>
@@ -67,7 +67,7 @@ const onFileChange = async (event: Event) => {
     &-upload{
         max-width: 50rem;
         width: 100%;
-        height: 15rem;
+        height: 20rem;
         display: flex;
         flex-direction: column;
         align-items: center;
