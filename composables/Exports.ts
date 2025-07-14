@@ -18,8 +18,8 @@ export function apiProductsFetch(url: string, options: RequestInit) {
 }
 
 export function apiConstructorFetch(url: string, options: RequestInit) {
-    // const path = CONSTRUCTOR_URL + url;
-    const path = url;
+    const path = CONSTRUCTOR_URL + url;
+    // const path = url;
     return fetch(path, options);
     // return true;
 }

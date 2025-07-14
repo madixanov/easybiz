@@ -21,7 +21,7 @@
         </li>
       </ul>
     </section>
-    <div class="dash-widget-nodata">
+    <div class="dash-widget-nodata" :style="{ display: cat.length === 0 ? 'flex' : 'none' }">
       <p>Нет доступных данных</p>
     </div>
   </div>
