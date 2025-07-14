@@ -3,7 +3,7 @@
     <header class="dash-widget-header">
       <p class="dash-widget-header-title">{{ title }}</p>
     </header>
-    <section class="dash-widget-content" v-if="prod && Object.keys(prod).length > 0">
+    <section class="dash-widget-content" v-if="!prod.error && Object.keys(prod).length > 0">
       <div class="dash-widget-media">
         <img :src="(prod.imageUrl ?? 'https://placehold.co/300x300?text=No+Image').replace('https://via.placeholder.com','https://placehold.co')" alt="Product Image" />
       </div>

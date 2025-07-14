@@ -1,4 +1,6 @@
 import type { ProductDto } from "~/interface/products/product";
+import { apiProductsFetch } from '~/composables/Exports';
+
 export class Products {
     private collector: any[];
     constructor(collector?: any[]) {
@@ -59,6 +61,22 @@ export class Products {
         const data = await response.json();
         console.log(data, 'created');
 
+        return response;
+    }
+
+    public async update(product: any) {
+        const options = {
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ productPatchDto: product})
+        };
+
+        const response = await apiProductsFetch(`/api/products`, options);
+        const data = await response.json();
+
+        console.log(data, 'updated');
         return response;
     }
 

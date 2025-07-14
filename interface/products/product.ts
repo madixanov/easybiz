@@ -9,9 +9,9 @@ export interface ProductDto {
   metaDescription?: string;
   metaTags?: string;
   description?: string;
-  price?: number;
-  profit?: number;
-  extra?: number;
+  price?: number | undefined;
+  profit?: number | undefined;
+  extra?: number | undefined;
   amount?: number;
   views?: number;
   warehouse?: string;

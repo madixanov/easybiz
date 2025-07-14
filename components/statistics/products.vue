@@ -15,7 +15,7 @@
               <img :src="item.imageUrl.replace('https://via.placeholder.com','https://placehold.co')" alt="Product Image" v-if="item.imageUrl && item.imageUrl.length > 0">
               <img src="https://placehold.co/300x300?text=No+Image" alt="Unavailable" v-else>
             </div>
-            <span> {{(item.metaTitle ?? 'Без названия').slice(0, 24).trim() +((item.metaTitle?.length ?? 0) > 20 ? "..." : "") }}</span>
+            <span> {{(item.model ?? 'Без названия').slice(0, 24).trim() +((item.model?.length ?? 0) > 20 ? "..." : "") }}</span>
           </div>
           <span v-if="item.price" class="dash-widget-item-price">${{ item.price.toFixed(2) }}</span>
         </li>

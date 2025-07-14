@@ -22,10 +22,10 @@ const productParams = ref({
   amount: 0,
   availability: true,
   description: "",
-  productManufacturerId: "0197f3f3-f7e8-7ac0-938f-94490f52c368",
-  sectionId: "0197f3f3-f805-7dcb-bccb-579e6d800663",
-  categoryId: "0197f3f3-f81d-79b4-ae87-5903bbf0dfc8",
-  countryId: "0197f3f3-f7e4-72b5-af45-b513181fde89",
+  productManufacturerId: "",
+  sectionId: "",
+  categoryId: "",
+  countryId: "",
   imageUrl: "",
 })
 

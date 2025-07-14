@@ -145,7 +145,7 @@ const props = defineProps<{
 onMounted(() => {
   setTimeout(() => {
     loaded.value = true;
-  }, 1000);
+  }, 2000);
 });
 </script>
 

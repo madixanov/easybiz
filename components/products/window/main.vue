@@ -39,9 +39,7 @@
       />
     </label>
     <div class="products-layout-item">
-      <label for="categories"
-        ><p class="products-layout-title">Выберите категорию:</p></label
-      >
+      <label for="categories"><p class="products-layout-title">Выберите категорию:</p></label>
       <select id="categories" name="categories" v-model="prodData.categoryId">
         <option
           v-for="(category, i) in categories"
@@ -104,7 +102,12 @@
         type="text"
         v-model="prodData.price"
         placeholder="Укажите цену"
+        min="0"
+        step="0.01"
+        @input="validatePrice"
+        pattern="^\d+(\.\d{0,2})?$"
       />
+      <span>$</span>
     </label>
     <label class="products-layout-item box30">
       <p class="products-layout-title">Наценка</p>
@@ -112,15 +115,23 @@
         type="text"
         v-model="prodData.extra"
         placeholder="Укажите наценку"
+        min="0"
+        max="100"
+        step="0.01"
+        @input="validateExtra"
+        pattern="^\d{1,3}(\.\d{0,2})?$"
       />
+      <span>%</span>
     </label>
     <label class="products-layout-item box30">
       <p class="products-layout-title">Прибыль</p>
       <input
         type="text"
         v-model="prodData.profit"
-        placeholder="Укажите прибыль"
+        :style="{'background-color': '#f0f0f0' }"
+        disabled
       />
+      <span>$</span>
     </label>
     <div class="products-layout-item">
       <label for="countries"
@@ -147,7 +158,8 @@
     <label class="products-layout-item">
       <p class="products-layout-title">Количество</p>
       <input
-        type="text"
+        type="number"
+        min="0"
         v-model="prodData.amount"
         placeholder="Укажите количество"
       />
@@ -178,6 +190,7 @@
 </template>
 
 <script lang="ts" setup>
+import { apiProductsFetch } from "~/composables/Exports" 
 const props = defineProps({
   prodData: {
     type: Object as PropType<any>,
@@ -189,6 +202,7 @@ const manufacturers = ref<any[]>([])
 const categories = ref<any[]>([]);
 const sections = ref<any>([]);
 const countries = ref<any>([]);
+
 const availabilities = ref([
   { id: true, name: 'Имеется' },
   { id: false, name: 'Нету' },
@@ -211,6 +225,56 @@ const getData = async ()=>{
   countriesRes.map((el: any)=> countries.value.push(el))
   manufacturersRes.map((el: any)=> manufacturers.value.push(el))
 }
+
+const validatePrice = () => {
+  props.prodData.price = props.prodData.price.replace(/[^0-9.]/g, '');
+
+  if ((props.prodData.price.match(/\./g) || []).length > 1) {
+    props.prodData.price = props.prodData.price.slice(0, props.prodData.price.lastIndexOf('.'));
+  }
+
+  if (props.prodData.price.includes('.')) {
+    const [integerPart, decimalPart] = props.prodData.price.split('.');
+    props.prodData.price = `${integerPart}.${decimalPart.slice(0, 2)}`;
+  }
+
+  if (!props.prodData.extra) {
+    props.prodData.profit = 0;
+  }
+};
+
+const validateExtra = () => {
+  props.prodData.extra = props.prodData.extra.replace(/[^0-9.]/g, '');
+
+  if ((props.prodData.extra.match(/\./g) || []).length > 1) {
+    props.prodData.extra = props.prodData.extra.slice(0, props.prodData.extra.lastIndexOf('.'));
+  }
+
+  if (props.prodData.extra.includes('.')) {
+    const [integerPart, decimalPart] = props.prodData.extra.split('.');
+    props.prodData.extra = `${integerPart}.${decimalPart.slice(0, 2)}`;
+  }
+
+  if (parseFloat(props.prodData.extra) > 100) {
+    props.prodData.extra = '100';
+  }
+
+  if (parseFloat(props.prodData.extra) < 0) {
+    props.prodData.extra = '0';
+  }
+
+  if (!props.prodData.extra) {
+    props.prodData.profit = 0;
+  }
+};
+
+watch([() => props.prodData.price, () => props.prodData.extra], () => {
+  if (props.prodData.price && props.prodData.extra !== null) {
+    props.prodData.profit = (props.prodData.price * parseFloat(props.prodData.extra)) / 100;
+  }
+});
+
+
 onMounted(async () => {
   getData()
 });
@@ -264,11 +328,28 @@ onMounted(async () => {
       }
     }
 
+    &-percent{
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
     &.box50{
       max-width: calc(100% / 2 - 0.6rem);
     }
     &.box30{
       max-width: calc(100% / 3 - 0.7rem);
+      position: relative;
+
+      & span{
+        position: absolute;
+        width: max-content;
+        bottom: 0;
+        right: 0;
+        border-left: .1rem solid #eeeeee;
+        font-size: 1.4rem;
+        padding: .6rem 1rem;
+      }
     }
 
     &.textarea {
