@@ -21,8 +21,8 @@
         </li>
       </ul>
     </section>
-    <div class="dash-widget-nodata" :style="{display: prod.length > 0 ? 'none' : 'block'}">
-      <p>{{ title }} не найдены</p>
+    <div class="dash-widget-nodata" :style="{display: prod.length > 0 ? 'none' : 'flex'}">
+      <p>Нет доступных данных</p>
     </div>
   </div>
 </template>
@@ -73,6 +73,12 @@ const props = defineProps({
       justify-content: center;
       align-items: center;
       color: #000;
+
+      & P{
+        font-size: 2rem;
+        font-weight: 600;
+        line-height: 120%;
+      }
     }
 
     &-list {

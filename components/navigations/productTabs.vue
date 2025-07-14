@@ -15,19 +15,53 @@
         Продукты
       </nuxt-link>
     </div>
-    <button class="product-tabs-add" @click="toggle">+ Добавить продукт</button>
+    <button
+      class="product-tabs-add"
+      @click="toggleGen"
+      :style="{ display: url === '/generator' ? 'block' : 'none' }"
+    >
+      Добавить сайт
+    </button>
+    <button
+      class="product-tabs-add"
+      @click="toggle"
+      :style="{ display: url === '/generator/table' ? 'block' : 'none' }"
+    >
+      Добавить продукт
+    </button>
   </div>
 
   <AddProductModal :class="{ active: show }" @close="toggle" />
+  <AddWebsiteModal :class="{ active: gen }" @close="toggleGen" />
 </template>
 
 <script lang="ts" setup>
 import AddProductModal from "~/components/ui/modals/products/addProduct.vue";
+import AddWebsiteModal from "~/components/ui/modals/generator/app.vue";
 
+const $router = useRouter();
+const url = ref("");
+
+if ($router.currentRoute.value) {
+  url.value = $router.currentRoute.value.path;
+}
 const show = ref(false);
+const gen = ref(true);
+
 const toggle = () => {
   show.value = !show.value;
 };
+
+const toggleGen = () => {
+  gen.value = !gen.value;
+};
+
+watch(
+  () => $router.currentRoute.value.path,
+  (newPath) => {
+    url.value = newPath;
+  }
+);
 </script>
 
 <style scoped lang="scss">

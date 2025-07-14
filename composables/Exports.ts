@@ -7,8 +7,8 @@ export const uri = `${USER_FETCH_HOST}`
 // middleware and otp.vue 
 
 export function apiDataFetch(url: string, options: RequestInit) {
-    const path = USER_FETCH_HOST + url; 
-    // const path = url; 
+    // const path = USER_FETCH_HOST + url; 
+    const path = url; 
     return fetch(path, options);
 }
 export function apiProductsFetch(url: string, options: RequestInit) {
