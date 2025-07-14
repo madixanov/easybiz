@@ -46,7 +46,7 @@ if ($router.currentRoute.value) {
   url.value = $router.currentRoute.value.path;
 }
 const show = ref(false);
-const gen = ref(true);
+const gen = ref(false);
 
 const toggle = () => {
   show.value = !show.value;
